@@ -1,5 +1,7 @@
 package tpIntegrador;
 
+import static org.junit.Assert.assertFalse;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -11,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 import tpIntegrador.Sample;
 
-class SampleTest {
+class SampleTest{
 	
 	public Sample sample;
 	public SpecieVinchuca specie;
@@ -29,12 +31,13 @@ class SampleTest {
 		location  = mock(Location.class);
 		idCreator = mock(IdUsuario.class);
 		opinion   = mock(Opinion.class);
-		sample = new Sample(specie,picture,location.idCreator,Arrays.asList(opinion),state); 
+		state     = new UnverifiedSample();
+		sample    = new Sample(specie,picture,location,idCreator,Arrays.asList(opinion),state); 
 	}
 	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void testConstructor() {
+		assertFalse(sample==null);
 	}
 
 }

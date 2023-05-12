@@ -53,7 +53,9 @@ public class Sample {
 	} 
 	
 	public Opinion getCurrentResult() {
-		
+		state.getCurrrentResult(this);
+		// si hay respuesta de experto da esa, si no la más repetida entre los básicos
+		//undefine si da empate entre más de una opción
 	}
 	
 	public void saveOpinion(Opinion opinion) {
