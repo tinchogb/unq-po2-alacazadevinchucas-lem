@@ -6,6 +6,7 @@ public class UnverifiedSample implements SampleState{
 		sample.addOpinion(opinion);
 	}
 	public Opinion getCurrentResult(Sample sample) {
+		return null;
 		
 	}
 }
