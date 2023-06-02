@@ -8,7 +8,7 @@ public class SystemSingleton{
 	private static SystemSingleton instance;
 	private  String				name;
 
-	private  List<String>		users     = new ArrayList<String>(); 
+	private  List<User>			users     = new ArrayList<User>(); 
 	private  List<Sample>		samples   = new ArrayList<Sample>(); 
 	private  List<Location>		locations = new ArrayList<Location>();
 
@@ -26,24 +26,44 @@ public class SystemSingleton{
     }
    
 	public String 			getName() 		{ return name; 		}
-	public List<String> 	getUsers() 		{ return users; 	}
+	public List<User> 		getUsers() 		{ return users; 	}
 	public List<Sample> 	getSamples() 	{ return samples; 	}
 	public List<Location> 	getLocations() 	{ return locations; }
 
-	public void addToList(Sample aSample) {// Cómo saber qué elem es para operar sobre su respectiva lista?
+
+	public void add(User aUser) {
 		// TODO Auto-generated method stub
-		if (! this.isInSamples(aSample)) {
+		if (! this.isIn(aUser)) {
+			this.getUsers().add(aUser);
+		}
+	}
+	public void add(Sample aSample) {
+		// TODO Auto-generated method stub
+		if (! this.isIn(aSample)) {
 			this.getSamples().add(aSample);
 		}
 	}
-	private boolean isInSamples(Sample aSample) {
+	public void add(Location aLocation) {
+		// TODO Auto-generated method stub
+		if (! this.isIn(aLocation)) {
+			this.getLocations().add(aLocation);
+		}
+	}
+
+	private boolean isIn(User aUser) {
+		// TODO Auto-generated method stub
+		return this.getUsers().stream()
+				.anyMatch(user -> user == aUser); // TODO: implementar equals para User
+	}
+	private boolean isIn(Sample aSample) {
 		// TODO Auto-generated method stub
 		return this.getSamples().stream()
 				.anyMatch(sample -> sample == aSample); // TODO: implementar equals para Samples
 	}
-
-	public void addToList(Location aLocation) {
+	private boolean isIn(Location aLocation) {
 		// TODO Auto-generated method stub
-		
+		return this.getLocations().stream()
+				.anyMatch(location -> location == aLocation); // TODO: implementar equals para Location
 	}
+
 }
