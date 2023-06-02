@@ -30,7 +30,7 @@ public class Location {
 
 	public double distance(Location aLocation) {
 		// TODO Auto-generated method stub
-		return distance(this, aLocation);
+		return this.distance(this, aLocation);
 	}
 
 	public List<Location> closestLocations(List<Location> locations, double maxDistance) {
@@ -43,7 +43,7 @@ public class Location {
 	public List<Sample> closestSamples(Sample aSample, double maxDistance) {
 		// TODO Auto-generated method stub
 		return this.system.getSamples().stream()
-				.filter(sample -> this.distance(sample.getLocation()) <= maxDistance)
+				.filter(sample -> this.distance(aSample.getLocation(), sample.getLocation()) <= maxDistance)
 				.toList();
 	}
 
