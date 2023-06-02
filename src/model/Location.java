@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Location {
 
-	private SystemSingleton system;	
+	private System 			system = System.getInstance("lalala");
 	private float 			latitude;
 	private float 			longitude;
 
@@ -33,14 +33,18 @@ public class Location {
 		return distance(this, aLocation);
 	}
 
-	public List<Location> closestLocations(List<Location> Locations) {
+	public List<Location> closestLocations(List<Location> locations, double maxDistance) {
 		// TODO Auto-generated method stub
-		return null;
+		return locations.stream()
+				.filter(location -> this.distance(location) <= maxDistance)
+				.toList();
 	}
 
-	public List<Sample> closestSamples(Sample aSample, Integer maxDistance) {
+	public List<Sample> closestSamples(Sample aSample, double maxDistance) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.system.getSamples().stream()
+				.filter(sample -> this.distance(sample.getLocation()) <= maxDistance)
+				.toList();
 	}
 
 
