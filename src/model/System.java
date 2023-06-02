@@ -3,9 +3,9 @@ package model;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SystemSingleton{
+public class System{
 
-	private static SystemSingleton instance;
+	private static System instance;
 	private  String				name;
 
 	private  List<User>			users     = new ArrayList<User>(); 
@@ -13,14 +13,14 @@ public class SystemSingleton{
 	private  List<Location>		locations = new ArrayList<Location>();
 
 	// Constructor
-	protected SystemSingleton(String aName) {
+	protected System(String aName) {
 		
 		this.name = aName;
 	}
 
-	public static SystemSingleton getInstance(String aName) {
+	public static System getInstance(String aName) {
         if (instance == null) {
-            instance = new SystemSingleton(aName);
+            instance = new System(aName);
         }
         return instance;
     }
