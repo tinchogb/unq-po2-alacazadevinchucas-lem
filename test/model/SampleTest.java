@@ -4,32 +4,12 @@ package model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
-
-
-import java.lang.runtime.*;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import model.BasicUser;
-import model.ExpertUser;
-import model.Location;
-import model.Opinion;
-import model.OpinionType;
-import model.Picture;
-import model.Sample;
-import model.SampleState;
-import model.Undefined;
-import model.UnverifiedSample;
-import model.VerifiedPartialSample;
-import model.VerifiedSample;
 
 import static org.mockito.Mockito.*;
 
@@ -37,9 +17,8 @@ class SampleTest{
 	
 	public Sample sample;
 	public VinchucaSpecies specie;
-	public Picture picture;
+	public String picture;
 	public Location location;
-	public int idCreator;
 	public ArrayList<Opinion> opinions;
 	public SampleState stateUnverified;
 	public SampleState stateVerified;
@@ -52,13 +31,13 @@ class SampleTest{
 	public OpinionType type;
 	public OpinionType type1;
 	public Undefined undefined;
+	public User user;
 	
 	@BeforeEach
 	public void setUp() {
-		specie          = mock(VinchucaSpecies.class);
-		picture         = mock(Picture.class);
+		//specie          = mock(VinchucaSpecies.class);
+		picture         = "foto";
 		location        = mock(Location.class);
-		idCreator       = 1;
 		opinion         = mock(Opinion.class);
 		opinion1        = mock(Opinion.class);
 		stateUnverified = mock(UnverifiedSample.class);
@@ -67,15 +46,16 @@ class SampleTest{
 		type            = mock(OpinionType.class);
 		type1           = mock(OpinionType.class);
 		undefined       = mock(Undefined.class);
+		user            = mock(User.class);
 		opinionsType.add(type);
 		
 		
-		sample          = new Sample(specie,picture,location,idCreator,opinion,stateUnverified); 
+		sample          = new Sample(specie,picture,location,user,opinion,stateUnverified); 
 	}
 	
 	@Test
 	void testConstructor() {
-		assertFalse(sample==null);
+		assertFalse(sample==null); 
 	}
 	
 	@Test
@@ -101,9 +81,8 @@ class SampleTest{
 		assertEquals(location, sample.getLocation());
 	}
 	@Test
-	void testGetIdCreator() {
-		sample.getIdCreator();
-		assertEquals(1,idCreator);
+	void testUser() {
+		assertEquals(user,sample.getUser());
 	}
 	@Test
 	void testSaveOpinionUnverifiedSample() {
@@ -190,14 +169,14 @@ class SampleTest{
 	
 	@Test
 	void testBasicOpinionsTwoOneOpinion() {
-		sample.opinions.add(opinion);
+		sample.getOpinions().add(opinion);
 		assertEquals(2,sample.basicOpinions().size());
 	}
 	
 	@Test
 	void testExpertsOpinionsDontSaveABasicOpinion() {
 		sample.changeSampleState(statePartial);
-		when(opinion.mustChangeState()).thenReturn(false);
+		when(opinion.isExpertOpinion()).thenReturn(false);
 		sample.addOpinion(opinion);
 		assertEquals(0,sample.expertsOpinions().size());
 	}
@@ -205,9 +184,21 @@ class SampleTest{
 	@Test
 	void testExpertsOpinionsSaveAExpertOpinion() {
 		sample.changeSampleState(statePartial);
-		when(opinion.mustChangeState()).thenReturn(true);
+		when(opinion.isExpertOpinion()).thenReturn(true);
 		sample.addOpinion(opinion);
 		assertEquals(2,sample.expertsOpinions().size());
 	} 
+	
+	@Test
+	void testMustChangeState() {
+		sample.mustChangeState();
+		verify(user,times(1)).mustChangeState();
+	}
+	
+	@Test
+	void testAbleToCommentInPartialVerified() {
+		sample.mustChangeState();
+		verify(user,times(1)).mustChangeState();
+	}
 	
 }

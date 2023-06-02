@@ -16,7 +16,7 @@ public class UnverifiedSample implements SampleState{
 	public VerifiedPartialSample nextState = new VerifiedPartialSample();
 	
 	public VerifiedPartialSample getNextState() {
-		return nextState;
+		return nextState; 
 	}
 	
 	public void saveOpinion(Opinion opinion,Sample sample) {
@@ -24,7 +24,7 @@ public class UnverifiedSample implements SampleState{
 		this.verifyStatusChange(opinion,sample);
 	}
 	private void verifyStatusChange(Opinion opinion, Sample sample) {
-		if (opinion.mustChangeState()) {
+		if (sample.mustChangeState()) {
 			sample.changeSampleState(nextState);
 		}
 	}

@@ -44,7 +44,7 @@ class UnverifiedSampleTest {
 	
 	@Test
 	void testSaveOpinion() {
-		when(opinion.mustChangeState()).thenReturn(false);
+		when(sample.mustChangeState()).thenReturn(false);
 		
 		unverified.saveOpinion(opinion, sample);
 		verify(sample, times(1)).addOpinion(opinion);
@@ -52,7 +52,7 @@ class UnverifiedSampleTest {
 	
 	@Test
 	void testSaveOpinionAndChangeSampleState() {
-		when(opinion.mustChangeState()).thenReturn(true);
+		when(sample.mustChangeState()).thenReturn(true);
 		
 		unverified.saveOpinion(opinion, sample);
 		verify(sample, times(1)).addOpinion(opinion);
