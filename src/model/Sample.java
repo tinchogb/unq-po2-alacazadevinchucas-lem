@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import model.VinchucaSpecies;
 
 public class Sample {
 	
@@ -158,11 +156,11 @@ public class Sample {
 
 
 	public boolean ableToCommentInPartialVerified() {
-		return user.ableToCommentInPartialVerified();
+		return user.ableToCommentInPartialVerified(); 
 	}
 
 
 	public boolean mustChangeState() {
-		return user.mustChangeState();
+		return user.mustChangeState(); 
 	}
 }

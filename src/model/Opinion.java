@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import org.mockito.stubbing.OngoingStubbing;
  
 public class Opinion { 
 	
