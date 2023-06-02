@@ -197,8 +197,8 @@ class SampleTest{
 	
 	@Test
 	void testAbleToCommentInPartialVerified() {
-		sample.mustChangeState();
-		verify(user,times(1)).mustChangeState();
-	}
+		sample.ableToCommentInPartialVerified();
+		verify(user,times(1)).ableToCommentInPartialVerified();
+	} 
 	
 }
