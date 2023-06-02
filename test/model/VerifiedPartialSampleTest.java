@@ -50,7 +50,7 @@ class VerifiedPartialSampleTest {
 	
 	@Test
 	void testSaveOpinionWithBasicOpinionThorwsException() {
-		when(opinion.ableToCommentInPartialVerified()).thenReturn(false);
+		when(sample.ableToCommentInPartialVerified()).thenReturn(false);
 		Exception exception = assertThrows(RuntimeException.class, 
 				() -> {
 					partial.saveOpinion(opinion,sample);
@@ -61,7 +61,7 @@ class VerifiedPartialSampleTest {
 	
 	@Test
 	void testSaveOpinionWithExpertOpinion() {
-		when(opinion.ableToCommentInPartialVerified()).thenReturn(true);
+		when(sample.ableToCommentInPartialVerified()).thenReturn(true);
 		partial.saveOpinion(opinion, sample);
 		verify(sample,times(1)).addOpinion(opinion);
 	}
@@ -80,8 +80,8 @@ class VerifiedPartialSampleTest {
 		opinions.add(opinion1);
 		when(sample.getOpinions()).thenReturn(opinions);
 		when(sample.calculateResult(sample.expertsOpinions())).thenReturn(new Undefined());
-		when(opinion.mustChangeState()).thenReturn(true);
-		when(opinion1.mustChangeState()).thenReturn(true);
+		when(opinion.isExpertOpinion()).thenReturn(true);
+		when(opinion1.isExpertOpinion()).thenReturn(true);
 		when(opinion.getType()).thenReturn(type);
 		when(opinion1.getType()).thenReturn(type1);
 		partial.verifyStatusChange(opinion,sample);

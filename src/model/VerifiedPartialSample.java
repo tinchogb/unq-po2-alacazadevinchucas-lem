@@ -1,7 +1,5 @@
 package model;
 
-import static org.junit.jupiter.api.DynamicTest.stream;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +16,7 @@ public class VerifiedPartialSample implements SampleState{
 
 	@Override
 	public void saveOpinion(Opinion opinion, Sample sample)throws RuntimeException {
-		if (opinion.ableToCommentInPartialVerified()) {
+		if (sample.ableToCommentInPartialVerified()) {
 		sample.addOpinion(opinion);	
 		this.verifyStatusChange(opinion,sample);
 		}
@@ -34,7 +32,7 @@ public class VerifiedPartialSample implements SampleState{
 			sample.changeSampleState(nextState);
 		}
 		
-		else if (sOpinions.filter(o -> o.mustChangeState())
+		else if (sOpinions.filter(o -> o.isExpertOpinion())
 				 .map(o -> o.getType())
 				 .anyMatch(o -> o == opinion.getType())){
 			sample.changeSampleState(nextState);

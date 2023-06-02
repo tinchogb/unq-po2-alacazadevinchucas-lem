@@ -10,29 +10,29 @@ import model.VinchucaSpecies;
 
 public class Sample {
 	
-	public VinchucaSpecies specie;
-	public Picture picture;
-	public Location location;
-	public int idCreator;
-	public ArrayList<Opinion> opinions;
-	public SampleState state;
+	private VinchucaSpecies specie;
+	private String picture;
+	private Location location;
+	private User user;
+	private ArrayList<Opinion> opinions;
+	private SampleState state;
 	private Undefined undefined= new Undefined();
 	
 	
-	public Sample(VinchucaSpecies specie, Picture picture, Location location, int idCreator,
+	public Sample(VinchucaSpecies specie, String picture, Location location, User user,
 			Opinion opinion, SampleState state) {
 
 		this.specie    = specie;
 		this.picture   = picture;
 		this.location  = location;
-		this.idCreator = idCreator;
+		this.user      = user;
 		this.opinions  = new ArrayList<Opinion> ();
 		opinions.add(opinion);
 		this.state     = state;
 	}
 	
 
-	public Picture getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 
@@ -44,8 +44,8 @@ public class Sample {
 
 
 
-	public int getIdCreator() {
-		return idCreator;
+	public User getUser() {
+		return user;
 	}
 
 
@@ -150,9 +150,19 @@ public class Sample {
 	public List<OpinionType> expertsOpinions(){
 		List<OpinionType> opinionsType = opinions
 				.stream()
-				.filter(o -> o.mustChangeState())
+				.filter(o -> o.isExpertOpinion())
 				.map(o -> o.getType())
 				.collect(Collectors.toList());
 		return opinionsType;
+	}
+
+
+	public boolean ableToCommentInPartialVerified() {
+		return user.ableToCommentInPartialVerified();
+	}
+
+
+	public boolean mustChangeState() {
+		return user.mustChangeState();
 	}
 }
