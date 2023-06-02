@@ -16,9 +16,8 @@ import model.Sample;
 
 public class ZoneCoverageTest {
 
-	public SystemSingleton system;
+	public System system;
 	public ZoneCoverage zone;
-	public String 		id;
 	public String 		name;
 	public Location 	epicenter;
 	public Integer 		radiusInKm;
@@ -32,10 +31,9 @@ public class ZoneCoverageTest {
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-		this.system		 = mock(SystemSingleton.class);
+		this.system		 = mock(System.class);
 		when(system.getInstance("lalala")).thenCallRealMethod();
 
-		this.id       	 = "1";
 		this.name        = "zone1";
 		this.epicenter   = mock(Location.class);
 		this.radiusInKm	 = 1;
@@ -47,10 +45,10 @@ public class ZoneCoverageTest {
 
 		
 		// SUT (System Under Test): objeto a testear
-		this.zone		 = new ZoneCoverage(id,name,epicenter,radiusInKm);
-		SystemSingleton system = this.zone.getSystem();
-		system.addToList(sample1);
-		system.addToList(sample2);
+		this.zone		 = new ZoneCoverage(name,epicenter,radiusInKm);
+		System system = this.zone.getSystem();
+		system.add(sample1);
+		system.add(sample2);
 	}
 
 	@Test
@@ -69,7 +67,7 @@ public class ZoneCoverageTest {
 	public void testOneSampleRegisteredInZone() {
 		// Exercise
 		this.sample1.location = this.epicenter;
-		List<String> samplesInZone = zone.samplesInZone();
+		List<Sample> samplesInZone = zone.samplesInZone();
 		
 		// Verify
 	}
