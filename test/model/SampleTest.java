@@ -176,7 +176,7 @@ class SampleTest{
 	@Test
 	void testExpertsOpinionsDontSaveABasicOpinion() {
 		sample.changeSampleState(statePartial);
-		when(opinion.isExpertOpinion()).thenReturn(false);
+		when(opinion.getIsExpertOpinion()).thenReturn(false);
 		sample.addOpinion(opinion);
 		assertEquals(0,sample.expertsOpinions().size());
 	}
@@ -184,21 +184,10 @@ class SampleTest{
 	@Test
 	void testExpertsOpinionsSaveAExpertOpinion() {
 		sample.changeSampleState(statePartial);
-		when(opinion.isExpertOpinion()).thenReturn(true);
+		when(opinion.getIsExpertOpinion()).thenReturn(true);
 		sample.addOpinion(opinion);
 		assertEquals(2,sample.expertsOpinions().size());
 	} 
 	
-	@Test
-	void testMustChangeState() {
-		sample.mustChangeState();
-		verify(user,times(1)).mustChangeState();
-	}
-	
-	@Test
-	void testAbleToCommentInPartialVerified() {
-		sample.ableToCommentInPartialVerified();
-		verify(user,times(1)).ableToCommentInPartialVerified();
-	} 
 	
 }

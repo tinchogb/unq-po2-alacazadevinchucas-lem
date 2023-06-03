@@ -30,9 +30,9 @@ class OpinionTest {
 		type    = mock(OpinionType.class); 
 		user    = mock(User.class);
 		user1   = mock(User.class);
-		opinion = new Opinion(user,type);
-		opinion1= new Opinion(user1,type);
-		opinion2= new Opinion(user,type);
+		opinion = new Opinion(user,type,true);
+		opinion1= new Opinion(user1,type,false);
+		opinion2= new Opinion(user,type,false);
 		
 	} 
 
@@ -41,6 +41,8 @@ class OpinionTest {
 		assertEquals(opinion.getUser(), user);
 		assertEquals(opinion.getType(),type);
 		assertEquals(opinion.getDate(),LocalDate.now());
+		assertEquals(opinion.getIsExpertOpinion(),true);
+		assertEquals(opinion1.getIsExpertOpinion(),false);
 	}
 	
 	@Test
@@ -64,9 +66,9 @@ class OpinionTest {
 	}
 
 	@Test
-	void testIsExpertOpinion() {
-		opinion.isExpertOpinion();
-		verify(user,times(1)).mustChangeState();
+	void testgetIsExpertOpinion() {
+		opinion.getIsExpertOpinion();
+		assertEquals(true,opinion.getIsExpertOpinion());
 	}
 
 	
