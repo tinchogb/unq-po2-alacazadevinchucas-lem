@@ -10,12 +10,14 @@ public class Opinion {
 	private User user;
 	private LocalDate date;
 	private OpinionType type;
+	private boolean isExpertOpinion;
 
 	
-	public Opinion(User user, OpinionType type) {
-		this.user = user;
-		this.type = type;
-		this.date = LocalDate.now();
+	public Opinion(User user, OpinionType type, boolean isExpertOpinion) {
+		this.user            = user;
+		this.type            = type;
+		this.date            = LocalDate.now();
+		this.isExpertOpinion = isExpertOpinion;
 	}
 
 	public Object getUser() { 
@@ -31,13 +33,13 @@ public class Opinion {
 		return date;
 	}
 
+	public boolean getIsExpertOpinion() {
+		return isExpertOpinion;
+	}
+	
 	public boolean isRepeatUser(ArrayList<Opinion> opinions) {
 		Stream<Object> sOpinions = opinions.stream().map(o -> o.getUser());
 		return sOpinions.anyMatch(o-> o == this.getUser());
-	}
-
-	public boolean isExpertOpinion() {
-		return user.mustChangeState();
 	}
 
 }

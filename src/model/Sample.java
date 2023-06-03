@@ -148,19 +148,10 @@ public class Sample {
 	public List<OpinionType> expertsOpinions(){
 		List<OpinionType> opinionsType = opinions
 				.stream()
-				.filter(o -> o.isExpertOpinion())
+				.filter(o -> o.getIsExpertOpinion())
 				.map(o -> o.getType())
 				.collect(Collectors.toList());
 		return opinionsType;
 	}
 
-
-	public boolean ableToCommentInPartialVerified() {
-		return user.ableToCommentInPartialVerified(); 
-	}
-
-
-	public boolean mustChangeState() {
-		return user.mustChangeState(); 
-	}
 }

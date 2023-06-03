@@ -14,7 +14,7 @@ public class UnverifiedSample implements SampleState{
 		this.verifyStatusChange(opinion,sample);
 	}
 	private void verifyStatusChange(Opinion opinion, Sample sample) {
-		if (sample.mustChangeState()) {
+		if (opinion.getIsExpertOpinion()) {
 			sample.changeSampleState(nextState);
 		}
 	}

@@ -14,7 +14,7 @@ public class VerifiedPartialSample implements SampleState{
 
 	@Override
 	public void saveOpinion(Opinion opinion, Sample sample)throws RuntimeException {
-		if (sample.ableToCommentInPartialVerified()) {
+		if (opinion.getIsExpertOpinion()) {
 		sample.addOpinion(opinion);	
 		this.verifyStatusChange(opinion,sample);
 		}
@@ -30,7 +30,7 @@ public class VerifiedPartialSample implements SampleState{
 			sample.changeSampleState(nextState);
 		}
 		
-		else if (sOpinions.filter(o -> o.isExpertOpinion())
+		else if (sOpinions.filter(o -> o.getIsExpertOpinion())
 				 .map(o -> o.getType())
 				 .anyMatch(o -> o == opinion.getType())){
 			sample.changeSampleState(nextState);
