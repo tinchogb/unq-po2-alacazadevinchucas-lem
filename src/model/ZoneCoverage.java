@@ -1,23 +1,23 @@
 package model;
 
-import model.Sample;
 import java.util.List;
+import java.util.ArrayList;
 
 public class ZoneCoverage implements IZoneCoverage{
 
-	private System 		system = System.getInstance("lalala");
+	private System 		system = System.getInstance("systemLEM");
 	private String 	 	name;
 	private Location 	epicenter;
 	private Integer  	radiusInKm;
 
-	public List<IOrganization> organizations;
+	private List<IOrganization> organizations = new ArrayList<>();
 
 	// Constructor for testing purpose only 
-	public ZoneCoverage(System aSystem, String name, Location epicenter, Integer radiusInKm) {
-		this.system		= aSystem;
+	public ZoneCoverage(String name, Location epicenter, Integer radiusInKm, List<IOrganization> orgs) {
 		this.name		= name;
 		this.epicenter	= epicenter;
 		this.radiusInKm	= radiusInKm;
+		this.organizations	= orgs;
 	}	
 
 	// Real constructor
@@ -29,9 +29,22 @@ public class ZoneCoverage implements IZoneCoverage{
 	}
 
 	@Override
-	public void Attach(Organization anOrg) {};
+	public void Attach(IOrganization anOrg) {
+		if (! this.isIn(anOrg)) {
+			this.organizations.add(anOrg);
+		}
+	}
+	private boolean isIn(IOrganization anOrg) {
+		// TODO Auto-generated method stub
+		return this.organizations.stream().anyMatch(org -> org == anOrg); // TODO: implementar equals para IOrg
+	}
+
 	@Override
-	public void Detach(Organization anOrg) {};
+	public void Detach(IOrganization anOrg) {
+		List<IOrganization> newOrgs = this.organizations.stream().filter(org -> org != anOrg).toList();
+		this.organizations = newOrgs;
+	}
+
 	@Override
 	public void Notify(Sample aSample) {
 		this.organizations.stream().forEach(org -> org.Update(this, aSample));
