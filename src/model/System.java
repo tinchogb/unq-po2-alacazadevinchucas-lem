@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class System{
 
+	private List<ZoneCoverage> listenerZones;
+
 	private static System instance;
 	private  String				name;
 
@@ -25,10 +27,10 @@ public class System{
         return instance;
     }
    
-	public String 			getName() 		{ return name; 		}
-	public List<User> 		getUsers() 		{ return users; 	}
-	public List<Sample> 	getSamples() 	{ return samples; 	}
-	public List<Location> 	getLocations() 	{ return locations; }
+	public String 				getName() 		{ return name; 		}
+	public List<User> 			getUsers() 		{ return users; 	}
+	public List<Sample> 		getSamples() 	{ return samples; 	}
+	public List<Location> 		getLocations() 	{ return locations; }
 
 
 	public void add(User aUser) {
@@ -65,5 +67,26 @@ public class System{
 		return this.getLocations().stream()
 				.anyMatch(location -> location == aLocation); // TODO: implementar equals para Location
 	}
+	private boolean isIn(ZoneCoverage aZone) {
+		// TODO Auto-generated method stub
+		return this.listenerZones.stream()
+				.anyMatch(zone -> zone == aZone); // TODO: implementar equals para ZoneCoverage
+	}
+
+	// Nota: No se usa interfaz ya que el sistema es único.
+	public void Attach(ZoneCoverage aZone) {
+		if (! this.isIn(aZone)) {
+			this.listenerZones.add(aZone);
+		}
+	};
+	public void Detach(ZoneCoverage aZone) {};
+	public void Notify(Sample aSample) {
+		this.listenerZones.stream().forEach(aZone -> aZone.Update(aSample));
+	}
+
+	// Quizás no se necesitan ya que se pasa el cambio por parámetro en el Notify.
+	public void GetState() {};
+	public void SetState() {};
+	public void subjectState() {};
 
 }
