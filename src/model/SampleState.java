@@ -6,5 +6,7 @@ public interface SampleState {
 
 	public void getCurrrentResult(Sample sample);
 	
+	public boolean isValidated();
+	
 	
 }

@@ -15,6 +15,7 @@ public class Sample {
 	private ArrayList<Opinion> opinions;
 	private SampleState state;
 	private Undefined undefined= new Undefined();
+	private System system;
 	
 	
 	public Sample(VinchucaSpecies specie, String picture, Location location, User user,
@@ -27,6 +28,7 @@ public class Sample {
 		this.opinions  = new ArrayList<Opinion> ();
 		opinions.add(opinion);
 		this.state     = state;
+		this.system    = System.getInstance();
 	}
 	
 
@@ -86,9 +88,10 @@ public class Sample {
 
 	public void changeSampleState(SampleState sampleState) {
 		this.state = sampleState;
-		
+		if (this.state.isValidated()) {
+			system.Notify(this);
+		}
 	}
-
 
 	public Answer calculateResult(List<OpinionType> opinions) {
 	
@@ -152,6 +155,10 @@ public class Sample {
 				.map(o -> o.getType())
 				.collect(Collectors.toList());
 		return opinionsType;
+	}
+	
+	public void isValidated() {
+		this.state.isValidated();
 	}
 
 }
