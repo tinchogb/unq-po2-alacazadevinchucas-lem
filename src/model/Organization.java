@@ -7,10 +7,12 @@ import model.ExternalFunctionality;
 
 import java.util.List;
 
-public class Organization {
+public class Organization implements IOrganization {
+
+	
+	private List<ZoneCoverage> 		registeredZones;
 
 	public  OrganizationType		type;
-	private List<ZoneCoverage> 		registeredZones;
 	private Location 				location;
 	private ExternalFunctionality 	pluginSample;
 	private ExternalFunctionality 	pluginValidation;
@@ -30,6 +32,11 @@ public class Organization {
 	public List<ZoneCoverage> getRegisteredZones() { return registeredZones; }
 	public Location 		  getLocation() 	   { return location; }
 
+	@Override
+	public void Update(ZoneCoverage aZone, Sample aSample) {
+		if (aSample.isValidated()) { this.newValidationExtFunc(aZone, aSample); }
+		else					   { this.newSampleExtFunc(aZone, aSample); }
+	}
 
 	public Integer nbCurrentWorkers() {
 		// TODO Auto-generated method stub
