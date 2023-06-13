@@ -71,5 +71,10 @@ class UnverifiedSampleTest {
 		assertEquals(null, sample.calculateResult(null));
 	}
 	
-
+	@Test
+	void isValidated() {
+		assertFalse(unverified.isValidated());
+		
+	}
+	
 }

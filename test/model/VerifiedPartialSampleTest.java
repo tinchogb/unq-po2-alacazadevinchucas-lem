@@ -91,7 +91,13 @@ class VerifiedPartialSampleTest {
 	@Test
 	void testGetCurrentResult() {
 		partial.getCurrrentResult(sample);
-		verify(sample,times(1)).calculateResult(sample.expertsOpinions());	
+		verify(sample,times(1)).calculateResult(sample.expertsOpinions());	 
+	}
+	
+	@Test
+	void isValidated() {
+		assertFalse(partial.isValidated());
+		
 	}
 
 }

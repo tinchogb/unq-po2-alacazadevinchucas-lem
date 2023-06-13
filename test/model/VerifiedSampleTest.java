@@ -43,4 +43,10 @@ class VerifiedSampleTest {
 		verify(sample,times(1)).calculateResult(sample.expertsOpinions());
 		
 	}
+	
+	@Test
+	void isValidated() {
+		assertTrue(verified.isValidated());
+		
+	}
 }

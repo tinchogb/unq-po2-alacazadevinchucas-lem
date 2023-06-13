@@ -11,6 +11,9 @@ public class VerifiedSample implements SampleState {
 	public void getCurrrentResult(Sample sample) {
 		sample.calculateResult(sample.expertsOpinions());
 	} 
-		
+	
+	public boolean isValidated() {
+		return true;
+	}
 }
 

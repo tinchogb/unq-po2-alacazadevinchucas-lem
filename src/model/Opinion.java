@@ -34,7 +34,7 @@ public class Opinion {
 	}
 
 	public boolean getIsExpertOpinion() {
-		return isExpertOpinion;
+		return isExpertOpinion; 
 	}
 	
 	public boolean isRepeatUser(ArrayList<Opinion> opinions) {

@@ -32,6 +32,7 @@ class SampleTest{
 	public OpinionType type1;
 	public Undefined undefined;
 	public User user;
+	public System system;
 	
 	@BeforeEach
 	public void setUp() {
@@ -47,6 +48,7 @@ class SampleTest{
 		type1           = mock(OpinionType.class);
 		undefined       = mock(Undefined.class);
 		user            = mock(User.class);
+		system          = mock(System.class);
 		opinionsType.add(type);
 		
 		
@@ -189,5 +191,24 @@ class SampleTest{
 		assertEquals(2,sample.expertsOpinions().size());
 	} 
 	
+	@Test
+	void testIsValidated() {
+		sample.isValidated();
+		verify(stateUnverified,times(1)).isValidated();
+	}
+	
+	@Test
+	void testChangeSampleStateWithUnvalidatedSample() {
+		when(stateUnverified.isValidated()).thenReturn(false);
+		sample.isValidated();
+		verify(system, times(0)).Notify(sample);
+	}
+	
+	@Test
+	void testChangeSampleStateWithvalidatedSample() {
+		when(stateUnverified.isValidated()).thenReturn(true);
+		sample.isValidated();
+		verify(system, times(0)).Notify(sample);
+	}
 	
 }

@@ -44,4 +44,7 @@ public class VerifiedPartialSample implements SampleState{
 		sample.calculateResult(sample.expertsOpinions());
 	}
 	
+	public boolean isValidated() {
+		return false;
+	}
 }

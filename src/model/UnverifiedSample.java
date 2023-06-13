@@ -25,6 +25,10 @@ public class UnverifiedSample implements SampleState{
 		sample.calculateResult(sample.basicOpinions());
 			
 	}
+	
+	public boolean isValidated() {
+		return false;
+	}
 			
 	
 }
