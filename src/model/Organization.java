@@ -1,10 +1,5 @@
 package model;
 
-import model.Location;
-import model.OrganizationType;
-import model.ZoneCoverage;
-import model.ExternalFunctionality;
-
 import java.util.List;
 
 public class Organization implements IOrganization {
@@ -27,7 +22,7 @@ public class Organization implements IOrganization {
 		this.pluginValidation 	= pluginValidation;
 	}
 
-	
+
 	public OrganizationType   getType() 		   { return type; }
 	public List<ZoneCoverage> getRegisteredZones() { return registeredZones; }
 	public Location 		  getLocation() 	   { return location; }

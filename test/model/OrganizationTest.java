@@ -9,9 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
-import model.ZoneCoverage;
-import model.Organization;
-import model.ExternalFunctionality;
 
 public class OrganizationTest {
 
