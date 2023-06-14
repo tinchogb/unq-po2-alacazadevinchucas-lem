@@ -13,8 +13,8 @@ public class Location {
 		this.longitude	= aLongitude;
 	}
 
-	public float getLatitude() 	{ return latitude; }
-	public float getLongitude() { return longitude; }
+	public float getLatitude() 	{ return this.latitude; }
+	public float getLongitude() { return this.longitude; }
 
 	public double distance(Location aLocation1, Location aLocation2) {
 		// Taken from: https://stackoverflow.com/questions/14431032/i-want-to-calculate-the-distance-between-two-points-in-java
