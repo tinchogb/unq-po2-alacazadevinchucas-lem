@@ -66,7 +66,7 @@ class UnverifiedSampleTest {
 	
 	@Test
 	void testGetCurrentResult() {
-		unverified.getCurrrentResult(sample);
+		unverified.getCurrentResult(sample);
 		when(sample.calculateResult(null)).thenReturn(null);
 		assertEquals(null, sample.calculateResult(null));
 	}

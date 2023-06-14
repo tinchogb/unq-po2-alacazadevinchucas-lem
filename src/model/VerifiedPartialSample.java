@@ -39,9 +39,9 @@ public class VerifiedPartialSample implements SampleState{
 
 
 	@Override
-	public void getCurrrentResult(Sample sample) {
+	public Answer getCurrentResult(Sample sample) {
 		
-		sample.calculateResult(sample.expertsOpinions());
+		return sample.calculateResult(sample.expertsOpinions());
 	}
 	
 	public boolean isValidated() {

@@ -20,9 +20,9 @@ public class UnverifiedSample implements SampleState{
 	}
 	
 	@Override
-	public void getCurrrentResult(Sample sample) {
+	public Answer getCurrentResult(Sample sample) {
 
-		sample.calculateResult(sample.basicOpinions());
+		return sample.calculateResult(sample.basicOpinions());
 			
 	}
 	

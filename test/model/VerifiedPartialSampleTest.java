@@ -90,7 +90,7 @@ class VerifiedPartialSampleTest {
 	
 	@Test
 	void testGetCurrentResult() {
-		partial.getCurrrentResult(sample);
+		partial.getCurrentResult(sample);
 		verify(sample,times(1)).calculateResult(sample.expertsOpinions());	 
 	}
 	

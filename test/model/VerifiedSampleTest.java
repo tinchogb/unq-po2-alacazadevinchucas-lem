@@ -39,7 +39,7 @@ class VerifiedSampleTest {
 	
 	@Test
 	void testGetCurrentResult() {
-		verified.getCurrrentResult(sample);
+		verified.getCurrentResult(sample);
 		verify(sample,times(1)).calculateResult(sample.expertsOpinions());
 		
 	}
