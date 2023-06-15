@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class System {
 
-	private List<ZoneCoverage> listenerZones;
+	private List<ZoneCoverage> listenerZones = new ArrayList<ZoneCoverage>();
 
 	private static System instance;
 
@@ -17,6 +17,15 @@ public class System {
 
 	// Constructor
 	protected System() {}
+
+	// Constructor for test
+	protected System(List<User> users) {
+		this.users = users;
+	}
+
+	protected System(List<ZoneCoverage> listeners) {
+		this.listenerZones = listeners;
+	}
 
 	public static System getInstance() {
         if (instance == null) {
@@ -83,15 +92,19 @@ public class System {
 		if (! this.isInListeners(aZone)) {
 			this.listenerZones.add(aZone);
 		}
-	};
-	public void Detach(ZoneCoverage aZone) {};
+	}
+
+	public void Detach(ZoneCoverage aZone) {
+		this.listenerZones.removeIf(zone -> zone == aZone);
+	}
+
 	public void Notify(Sample aSample) {
 		this.listenerZones.stream().forEach(aZone -> aZone.Update(aSample));
 	}
 
 	// Quizás no se necesitan ya que se pasa el cambio por parámetro en el Notify.
-	public void GetState() {};
-	public void SetState() {};
-	public void subjectState() {};
+	public void GetState() {}
+	public void SetState() {}
+	public void subjectState() {}
 
 }

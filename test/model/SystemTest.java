@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 import org.mockito.MockedStatic;
 
 
@@ -59,8 +60,6 @@ public class SystemTest {
 		
 		// SUT (System Under Test): objeto a testear
 		this.system     = new System();
-		this.system.add(sample1);
-		this.system.add(sample2);
 	}
 
 	@Test
@@ -79,38 +78,75 @@ public class SystemTest {
 
 	@Test
 	void testGetUsers() {
+		this.system.add(user1);
+		this.system.add(user2);
+		List<User> expUsers = new ArrayList<>();
+		expUsers.add(user1);
+		expUsers.add(user2);
+		assertEquals(expUsers, this.system.getUsers());
 	}
 	
 	@Test
 	void testGetSamples() {
+		this.system.add(sample1);
+		this.system.add(sample2);
+		List<Sample> expSamples = new ArrayList<>();
+		expSamples.add(sample1);
+		expSamples.add(sample2);
+		assertEquals(expSamples, this.system.getSamples());
 	}
 	
 	@Test
 	void testGetLocations() {
+		this.system.add(location1);
+		this.system.add(location2);
+		List<Location> expLocations = new ArrayList<>();
+		expLocations.add(location1);
+		expLocations.add(location2);
+		assertEquals(expLocations, this.system.getLocations());
 	}
 	
 	@Test
 	void testGetZones() {
+		this.system.add(zone1);
+		this.system.add(zone2);
+		List<ZoneCoverage> expZones = new ArrayList<>();
+		expZones.add(zone1);
+		expZones.add(zone2);
+		assertEquals(expZones, this.system.getZones());
 	}
+
 
 	@Test
 	void testAddForUsers() {
+		this.users  = spy(new ArrayList<User>());
+		this.system = new System(this.users);
+		this.system.add(user1);
+		assertEquals(this.users, this.system.getUsers());
+		verify(this.users, times(1)).add(user1);
 	}
 
 	@Test
 	void testAddForSamples() {
+		// Igual que 'testAddForUsers'
 	}
 
 	@Test
 	void testAddForLocations() {
+		// Igual que 'testAddForUsers'
 	}
 
 	@Test
 	void testAddForZones() {
+		// Igual que 'testAddForUsers'
 	}
 
 	@Test
 	void testIsInForUsers() {
+		// No sabemos cómo testear métodos privados
+		// Al buscar en la web nos encontramos con
+		// refactoring de tests o uso de bibliotecas
+		// alternativas como 'PowerMock' y decoradores.
 	}
 
 	@Test
@@ -130,14 +166,43 @@ public class SystemTest {
 	}
 
 	@Test
-	void testAttach() {
+	public void testAttach() {
+		this.listenerZones = spy(new ArrayList<ZoneCoverage>());
+		// New SUT (System Under Test): objeto a testear
+		this.system = new System(this.listenerZones);
+		this.system.Attach(zone1);
+		this.system.Attach(zone2);
+
+		InOrder order = inOrder(this.listenerZones);
+		order.verify(this.listenerZones).add(zone1);
+		order.verify(this.listenerZones).add(zone2);
 	}
 
 	@Test
 	void testDetach() {
+		this.listenerZones = spy(new ArrayList<ZoneCoverage>());
+		this.system = new System(this.listenerZones);
+		this.system.Attach(zone1);
+		this.system.Attach(zone2);
+		assertEquals(2, this.listenerZones.size());
+		this.system.Detach(zone1);
+		this.system.Detach(zone2);
+		assertEquals(0, this.listenerZones.size());
 	}
 
 	@Test
 	void testNotify() {
+		this.zone1 	   = spy(this.zone1);
+		this.zone2	   = spy(this.zone2);
+		this.listenerZones = spy(new ArrayList<ZoneCoverage>());
+		// New SUT (System Under Test): objeto a testear
+		this.system = new System(this.listenerZones);
+		this.system.Attach(zone1);
+		this.system.Attach(zone2);
+		this.system.Notify(sample1);
+		
+		//verify
+		verify(zone1, times(1)).Update(sample1);
+		verify(zone2, times(1)).Update(sample1);
 	}
 }
