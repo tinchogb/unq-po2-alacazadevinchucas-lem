@@ -8,36 +8,73 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class OrganizationTest {
 
-	public Organization				org;
-	public OrganizationType 		type;
-	//public List<Activity> 			activities;
-	public List<ZoneCoverage> 		registeredZones;
-	public Location 				location;
-	public ExternalFunctionality 	pluginSample;
-	public ExternalFunctionality 	pluginValidation;
+	private Organization			org;
 
-	public ZoneCoverage				zone1;
-	public Sample 					sample;
+	private OrganizationType 		type;
+	private List<ZoneCoverage> 		registeredZones;
+	private List<Empleado>			empleados;
+	private Location 				location;
+	private ExternalFunctionality 	pluginSample;
+	private ExternalFunctionality 	pluginValidation;
+
+	private ZoneCoverage			zone1;
+	private Sample 					sample;
+
 	@BeforeEach
 	public void setUp() {
 	// DOC (Depended-On-Component): nuestros doubles
 	
 	// SUT (System Under Test): objeto a testear
-	org = new Organization(type, registeredZones, location, pluginSample, pluginValidation);
+	this.org = new Organization(type, registeredZones, location, pluginSample, pluginValidation, empleados);
 	}
-	
+
 	@Test
-	public void unTest() {
-	// Exercise
-		Integer nbWorkers = org.nbCurrentWorkers();
+	public void testConstructor() {
+		assertNotNull(this.org);
 	}
-	
+
 	@Test
-	public void otroTest() {
+	public void testGetType() {
+		assertEquals(this.type, this.org.getType());
+	}
+
+	@Test
+	public void testGetRegisteredZones() {
+		assertEquals(this.registeredZones, this.org.getRegisteredZones());
+	}
+
+	@Test
+	public void testGetLocation() {
+		assertEquals(this.location, this.org.getLocation());
+	}
+
+	@Test
+	public void testUpdate() {
+		when(sample.isValidated()).thenReturn(true);
+		assertEquals(this.org, this.org.Update(this.zone1, this.sample));
+		when(sample.isValidated()).thenReturn(false);
+		
+	}
+
+	@Test
+	public void testNbCurrentWorkers() {
+		this.empleados = spy(new ArrayList<Empleado>());
+		when(this.empleados.size()).thenReturn(0);
+		this.org = new Organization(type, registeredZones, location, pluginSample, pluginValidation, empleados);
+		assertEquals(0, this.org.nbCurrentWorkers());
+	}
+
+	@Test
+	public void testNewSampleExtFunc() {
+	}
+
+	@Test
+	public void testNewValidationExtFunc() {
 		// org.newSampleExtFunc(zone1, sample); 	// No es public !
 		// org.newValidationExtFunc(zone1, sample);	// No es public !
 	}
