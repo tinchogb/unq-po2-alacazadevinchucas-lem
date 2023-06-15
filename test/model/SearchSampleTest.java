@@ -35,8 +35,8 @@ public class SearchSampleTest {
 	// DOC (Depended-On-Component): nuestros doubles
 		this.system = mock(System.class);
 		
-//		this.date1 	= mock(LocalDate.class); // Tira error mockito 
-//		this.date2	= mock(LocalDate.class);
+		this.date1 	= LocalDate.now(); 
+		this.date2	= date1.plusDays(1);
 		this.aType	= mock(OpinionType.class);
 		this.sample1 	= mock(Sample.class);
 		this.sample2 	= mock(Sample.class);
@@ -61,8 +61,10 @@ public class SearchSampleTest {
 //		this.samples1.add(sample1);
 //		System systemN = spy(this.system);
 //		SearchSample searchSampleNew = new SearchSample(systemN);
-//		when(systemN.getSamples()).thenReturn(this.samples1);
+//		systemN.add(sample1);
+//		//when(systemN.getSamples()).thenReturn(this.samples1);
 //		assertEquals(this.samples1, searchSampleNew.creationDate(date1));
+//		verify(systemN, times(1)).getSamples();
 //	}
 
 	@Test

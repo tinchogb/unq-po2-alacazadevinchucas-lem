@@ -17,12 +17,12 @@ public class SearchSample {
 
 	public List<Sample> creationDate(LocalDate date) {
 		return this.system.getSamples().stream()
-			.filter(s -> s.getCreationDate() == date)
+			.filter(s -> s.getCreationDate().equals(date))
 			.toList();
 	}
 	public List<Sample> lastVerificationDate(LocalDate date) {
 		return this.system.getSamples().stream()
-		.filter(s -> s.getLastOpinion().getDate() == date)
+		.filter(s -> s.getLastOpinion().getDate().equals(date))
 		.toList();
 	}
 	public List<Sample> insectType(Answer aType) {

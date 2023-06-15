@@ -29,7 +29,6 @@ public class ZoneCoverage implements IZoneCoverage{
 
 	// Real constructor
 	public ZoneCoverage(String name, Location epicenter, Integer radiusInKm) {
-		// TODO Auto-generated constructor stub
 		this.name		= name;
 		this.epicenter	= epicenter;
 		this.radiusInKm	= radiusInKm;
@@ -61,9 +60,9 @@ public class ZoneCoverage implements IZoneCoverage{
 	}
 
 	// Quizás no se necesitan ya que se pasa el cambio por parámetro en el Notify.
-	public void GetState() {};
-	public void SetState() {};
-	public void subjectState() {};
+//	public void GetState() {};
+//	public void SetState() {};
+//	public void subjectState() {};
 
 	public void Update(Sample aSample) { // ZoneCoverage es intermediario en el cambio de estado.
 		this.Notify(aSample);

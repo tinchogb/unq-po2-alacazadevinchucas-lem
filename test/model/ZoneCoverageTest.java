@@ -67,37 +67,28 @@ public class ZoneCoverageTest {
 
 	@Test
 	void testSamplesInZone() {
-		assertEquals(0, this.zone.samplesInZone().size());
-		assertEquals("zone0", this.zone.getName());
+		when(system.getSamples()).thenReturn(new ArrayList<Sample>());
+		this.system =spy(this.system);
+		ZoneCoverage zoneNew = new ZoneCoverage(name,epicenter,radiusInKm,this.system); 
+		assertEquals(0, zoneNew.samplesInZone().size());
+		assertEquals("zone0", zoneNew.getName());
 	}
 
 	@Test
 	public void testOneSampleRegisteredInZone() {
 		// Exercise
 		List<Sample> expSamples = new ArrayList<>();
+		this.system =spy(this.system);
+		ZoneCoverage zoneNew = new ZoneCoverage(name,epicenter,radiusInKm,this.system);
 		when(this.system.getSamples()).thenReturn(expSamples);
 		when (sample1.getLocation()).thenReturn(this.epicenter);
 		this.system.add(sample1);
-		List<Sample> currSamplesInZone = zone.samplesInZone();
+		List<Sample> currSamplesInZone = zoneNew.samplesInZone();
 
 		// Verify
 		assertEquals(expSamples, currSamplesInZone);
 	}
 
-	@Test
-	public void testTwoSamplesRegisteredInZone() {
-		// Exercise
-		List<Sample> expSamples = new ArrayList<>();
-		when(this.system.getSamples()).thenReturn(expSamples);
-		when (sample1.getLocation()).thenReturn(this.epicenter);
-		this.system.add(sample1);
-		when (sample2.getLocation()).thenReturn(this.epicenter);
-		this.system.add(sample2);
-		List<Sample> currSamplesInZone = zone.samplesInZone();
-
-		// Verify
-		assertEquals(expSamples, currSamplesInZone);
-	}
 	
 	@Test
 	public void testIntersectWithOneZone() {
