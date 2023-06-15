@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-//import static org.junit.Assert.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -35,14 +34,13 @@ public class ZoneCoverageTest {
 	@SuppressWarnings("unchecked") // Al hacer click derecho en mock(List.class)
 	@BeforeEach
 	public void setUp() {
+		// DOC (Depended-On-Component): nuestros doubles
 		
 		this.name        = "zone0";
 		this.radiusInKm	 = 1;
 		this.epicenter   = mock(Location.class);
-		// DOC (Depended-On-Component): nuestros doubles
-//		this.system		 = mock(this.zone.getSystem());
-//		when(System.getInstance("systemLEM")).thenCallRealMethod();
 
+		this.system 	   = mock(System.class);
 		this.organizations = (List<IOrganization>) mock(List.class);
 		this.sample1 	   = mock(Sample.class);
 		this.sample2 	   = mock(Sample.class);
@@ -58,19 +56,19 @@ public class ZoneCoverageTest {
 
 	@Test
 	void testConstructor() {
-		assertFalse(this.zone==null);
+		assertNotNull(this.zone);
 	}
 
 	@Test
 	public void testGetSystem() {
-		assertEquals(this.system, this.zone.getSystem());
+		ZoneCoverage zoneNew = new ZoneCoverage(name,epicenter,radiusInKm,this.system);
+		assertEquals(this.system, zoneNew.getSystem());
 	}
 
 	@Test
 	void testSamplesInZone() {
 		assertEquals(0, this.zone.samplesInZone().size());
 		assertEquals("zone0", this.zone.getName());
-		//verify(opinion, times(2));
 	}
 
 	@Test
@@ -81,8 +79,9 @@ public class ZoneCoverageTest {
 		this.sample1.location = this.epicenter;
 		this.system.add(sample1);
 		List<Sample> currSamplesInZone = zone.samplesInZone();
-		assertEquals(expSamples, currSamplesInZone);
+
 		// Verify
+		assertEquals(expSamples, currSamplesInZone);
 	}
 
 	@Test
@@ -95,19 +94,22 @@ public class ZoneCoverageTest {
 		this.sample2.location = this.epicenter;
 		this.system.add(sample2);
 		List<Sample> currSamplesInZone = zone.samplesInZone();
-		assertEquals(expSamples, currSamplesInZone);
 
 		// Verify
+		assertEquals(expSamples, currSamplesInZone);
 	}
 	
 	@Test
 	public void testIntersectWithOneZone() {
+		this.system = spy(this.system);
+		List<ZoneCoverage> givenZones = new ArrayList<>();
+		givenZones.add(zone1);
+		when(this.system.getZones()).thenReturn(givenZones);
+		ZoneCoverage zoneNew = new ZoneCoverage(name,epicenter,radiusInKm,this.system);
 		when(this.zone1.getEpicenter()).thenReturn(this.epicenter);
-		this.system.Attach(zone1);
-		List<ZoneCoverage> currInterZones = zone.intersectionZones();
 		List<ZoneCoverage> expInterZones = new ArrayList<>();
 		expInterZones.add(zone1);
-		assertEquals(expInterZones, currInterZones);
+		assertEquals(expInterZones, zoneNew.intersectionZones());
 	}
 
 	@Test
@@ -115,42 +117,43 @@ public class ZoneCoverageTest {
 		List<IOrganization> spyIOrg = spy(this.organizations);
 		// New SUT (System Under Test): objeto a testear
 		ZoneCoverage zoneNew     = new ZoneCoverage(name,epicenter,radiusInKm,spyIOrg);
-		zone.Attach(iOrg1);
-		zone.Attach(iOrg2);
+		zoneNew.Attach(iOrg1);
+		zoneNew.Attach(iOrg2);
 
 		InOrder orden = inOrder(spyIOrg);
 		orden.verify(spyIOrg).add(iOrg1);
 		orden.verify(spyIOrg).add(iOrg2);
-
-		// Para saber si el método size() del spy fue llamado
-//		verify(spyIOrg).size();
 	}
 
 	@Test
 	public void testDetach() {
-		List<IOrganization> spyIOrg = spy(this.organizations);
+//		List<IOrganization> spyIOrg = spy(this.organizations);
+		List<IOrganization> spyIOrg = spy(new ArrayList<IOrganization>());
 		// New SUT (System Under Test): objeto a testear
-		ZoneCoverage zoneNew     = new ZoneCoverage(name,epicenter,radiusInKm,spyIOrg);
-		zone.Attach(iOrg1);
-		zone.Attach(iOrg2);
+		ZoneCoverage zoneNew = new ZoneCoverage(name,epicenter,radiusInKm,spyIOrg);
+		zoneNew.Attach(iOrg1);
+		zoneNew.Attach(iOrg2);
 		assertEquals(2, spyIOrg.size());
-		zone.Detach(iOrg1);
-		zone.Detach(iOrg2);
+		zoneNew.Detach(iOrg1);
+		zoneNew.Detach(iOrg2);
 		assertEquals(0, spyIOrg.size());
 	}
 
 	@Test
 	public void testNotify() {
-		this.iOrg1 	   = spy(iOrg1);
-		this.iOrg2	   = spy(iOrg2);
-		List<IOrganization> expOrgs = this.organizations;
+		this.iOrg1 	   = spy(this.iOrg1);
+		this.iOrg2	   = spy(this.iOrg2);
+		List<IOrganization> spyIOrg = spy(new ArrayList<IOrganization>());
+//		List<IOrganization> expOrgs = this.organizations;
 		// New SUT (System Under Test): objeto a testear
-		ZoneCoverage zoneNew     = new ZoneCoverage(name,epicenter,radiusInKm,expOrgs);
-		zone.Attach(iOrg1);
-		zone.Attach(iOrg2);
-		this.zone.Notify(sample1);
-		verify(iOrg1).Update(zone, sample1);
-		verify(iOrg2).Update(zone, sample1);
+		ZoneCoverage zoneNew     = new ZoneCoverage(name,epicenter,radiusInKm,spyIOrg);
+		zoneNew.Attach(iOrg1);
+		zoneNew.Attach(iOrg2);
+		zoneNew.Notify(sample1);
+		
+		//verify
+		verify(iOrg1, times(1)).Update(zoneNew, sample1);
+		verify(iOrg2, times(1)).Update(zoneNew, sample1);
 	}
 
 	@Test
