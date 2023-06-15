@@ -8,8 +8,8 @@ public class VerifiedSample implements SampleState {
 	}
 	
 	@Override
-	public void getCurrrentResult(Sample sample) {
-		sample.calculateResult(sample.expertsOpinions());
+	public Answer getCurrentResult(Sample sample) {
+		return sample.calculateResult(sample.expertsOpinions());
 	} 
 	
 	public boolean isValidated() {

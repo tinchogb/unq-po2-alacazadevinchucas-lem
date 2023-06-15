@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,10 +17,12 @@ public class Sample {
 	private SampleState state;
 	private Undefined undefined= new Undefined();
 	private System system;
+	private LocalDate creationDate;
+	private Opinion lastOpinion;
 	
 	
 	public Sample(VinchucaSpecies specie, String picture, Location location, User user,
-			Opinion opinion, SampleState state) {
+			Opinion opinion, SampleState state, System system) {
 
 		this.specie    = specie;
 		this.picture   = picture;
@@ -28,10 +31,19 @@ public class Sample {
 		this.opinions  = new ArrayList<Opinion> ();
 		opinions.add(opinion);
 		this.state     = state;
-		this.system    = System.getInstance();
+		this.system  = system;
+		this.creationDate = LocalDate.now();
+		this.lastOpinion  = opinion;
 	}
 	
-
+	public LocalDate getCreationDate() {
+		return this.creationDate;
+	}
+	
+	public Opinion getLastOpinion() {
+		return this.lastOpinion;
+	}
+	
 	public String getPicture() {
 		return picture;
 	}
@@ -47,8 +59,10 @@ public class Sample {
 	public User getUser() {
 		return user;
 	}
-
-
+	
+	public System getSystem() {
+		return system;
+	}
 
 	public ArrayList<Opinion> getOpinions() {
 		return opinions;
@@ -66,8 +80,8 @@ public class Sample {
 	}
 
 
-	public void getCurrentResult() {
-		state.getCurrrentResult(this);
+	public Answer getCurrentResult() {
+		return state.getCurrentResult(this);
 		
 	}
 	
@@ -84,12 +98,13 @@ public class Sample {
 
 	public void addOpinion(Opinion opinion) {
 		opinions.add(opinion);
+		this.lastOpinion  = opinion;
 	}
 
 	public void changeSampleState(SampleState sampleState) {
 		this.state = sampleState;
 		if (this.state.isValidated()) {
-			system.Notify(this);
+			this.system.Notify(this);
 		}
 	}
 
@@ -136,7 +151,7 @@ public class Sample {
 	
 	
 	public Undefined throwUndefined() {
-		return undefined;
+		return undefined; 
 		
 	}
 	

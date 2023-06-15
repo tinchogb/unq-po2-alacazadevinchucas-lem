@@ -5,6 +5,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,12 +55,28 @@ class SampleTest{
 		opinionsType.add(type);
 		
 		
-		sample          = new Sample(specie,picture,location,user,opinion,stateUnverified); 
+		sample          = new Sample(specie,picture,location,user,opinion,stateUnverified,system); 
 	}
 	
 	@Test
 	void testConstructor() {
 		assertFalse(sample==null); 
+	}
+	
+	@Test
+	void testCreationDate() {
+		assertEquals(sample.getCreationDate(),LocalDate.now());
+	}
+	
+	@Test
+	void testLastOpinionInitial() {
+		assertEquals(opinion,sample.getLastOpinion());
+	}
+	
+	@Test
+	void testLastOpinionAfterAddNewOpinion() {
+		sample.addOpinion(opinion1);
+		assertEquals(opinion1,sample.getLastOpinion());
 	}
 	
 	@Test
@@ -114,7 +133,7 @@ class SampleTest{
 	@Test
 	void testGetCurrentResult() {
 		sample.getCurrentResult();
-		verify(stateUnverified,times(1)).getCurrrentResult(sample);
+		verify(stateUnverified,times(1)).getCurrentResult(sample);
 		
 	}
 	
@@ -198,17 +217,28 @@ class SampleTest{
 	}
 	
 	@Test
-	void testChangeSampleStateWithUnvalidatedSample() {
+	void testIsValidatedInStateUnverified() {
 		when(stateUnverified.isValidated()).thenReturn(false);
 		sample.isValidated();
-		verify(system, times(0)).Notify(sample);
+		verify(stateUnverified,times(1)).isValidated();
+		verify(system,times(0)).Notify(sample);
 	}
 	
 	@Test
-	void testChangeSampleStateWithvalidatedSample() {
-		when(stateUnverified.isValidated()).thenReturn(true);
-		sample.isValidated();
+	void testIsValidatedInStateVerified() {
+		when(stateVerified.isValidated()).thenReturn(true);
+		sample.changeSampleState(stateVerified);
+		verify(stateVerified,times(1)).isValidated();
+		assertTrue(sample.getState().isValidated());
+		verify(sample.getSystem(),times(1)).Notify(sample);
+	} 
+
+	@Test
+	void testChangeSampleStateWithUnvalidatedSample() {
+		when(stateUnverified.isValidated()).thenReturn(false);
+		sample.changeSampleState(stateUnverified);
 		verify(system, times(0)).Notify(sample);
 	}
+	
 	
 }
