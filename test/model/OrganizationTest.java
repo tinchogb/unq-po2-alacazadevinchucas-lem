@@ -16,8 +16,8 @@ public class OrganizationTest {
 	private Organization			org;
 
 	private OrganizationType 		type;
-	private List<ZoneCoverage> 		registeredZones;
-	private List<Empleado>			empleados;
+	private List<ZoneCoverage> 		registeredZones = new ArrayList<>();
+	private List<Empleado>			empleados = new ArrayList<>();
 	private Location 				location;
 	private ExternalFunctionality 	pluginSample;
 	private ExternalFunctionality 	pluginValidation;
@@ -25,12 +25,22 @@ public class OrganizationTest {
 	private ZoneCoverage			zone1;
 	private Sample 					sample;
 
+	@SuppressWarnings("unchecked")
 	@BeforeEach
 	public void setUp() {
 	// DOC (Depended-On-Component): nuestros doubles
-	
-	// SUT (System Under Test): objeto a testear
-	this.org = new Organization(type, registeredZones, location, pluginSample, pluginValidation, empleados);
+//		this.type				= mock(OrganizationType.class);
+		this.registeredZones	= (List<ZoneCoverage>) mock(List.class);
+		this.empleados			= (List<Empleado>) mock(List.class);
+		this.location			= mock(Location.class);
+		this.pluginSample		= mock(ExternalFunctionality.class);
+		this.pluginValidation	= mock(ExternalFunctionality.class);
+
+		this.zone1				= mock(ZoneCoverage.class);
+		this.sample				= mock(Sample.class);
+
+		// SUT (System Under Test): objeto a testear
+		this.org = new Organization(type, registeredZones, location, pluginSample, pluginValidation, empleados);
 	}
 
 	@Test
