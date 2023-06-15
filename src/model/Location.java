@@ -4,13 +4,18 @@ import java.util.List;
 
 public class Location {
 
-	private System 			system = System.getInstance("systemLEM");
+	private System 			system = System.getInstance();
 	private float 			latitude;
 	private float 			longitude;
 
 	public Location(float aLatitude, float aLongitude) {
 		this.latitude 	= aLatitude;
 		this.longitude	= aLongitude;
+	}
+	public Location(float aLatitude, float aLongitude, System aSys) {
+		this.latitude 	= aLatitude;
+		this.longitude	= aLongitude;
+		this.system	= aSys;
 	}
 
 	public float getLatitude() 	{ return this.latitude; }
