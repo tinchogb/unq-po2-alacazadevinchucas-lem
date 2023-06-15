@@ -8,29 +8,27 @@ public class System {
 	private List<ZoneCoverage> listenerZones;
 
 	private static System instance;
-	private  String				name;
+
 
 	private  List<User>			users     = new ArrayList<User>(); 
 	private  List<Sample>		samples   = new ArrayList<Sample>(); 
 	private  List<Location>		locations = new ArrayList<Location>();
+	private  List<ZoneCoverage>	zones 	  = new ArrayList<ZoneCoverage>();
 
 	// Constructor
-	protected System(String aName) {
-		
-		this.name = aName;
-	}
+	protected System() {}
 
-	public static System getInstance(String aName) {
+	public static System getInstance() {
         if (instance == null) {
-            instance = new System(aName);
+            instance = new System();
         }
         return instance;
     }
-   
-	public String 				getName() 		{ return name; 		}
+
 	public List<User> 			getUsers() 		{ return users; 	}
 	public List<Sample> 		getSamples() 	{ return samples; 	}
 	public List<Location> 		getLocations() 	{ return locations; }
+	public List<ZoneCoverage> 	getZones() 		{ return zones; }
 
 
 	public void add(User aUser) {
@@ -51,31 +49,38 @@ public class System {
 			this.getLocations().add(aLocation);
 		}
 	}
+	public void add(ZoneCoverage aZone) {
+		// TODO Auto-generated method stub
+		if (! this.isIn(aZone)) {
+			this.getZones().add(aZone);
+		}
+	}
 
 	private boolean isIn(User aUser) {
-		// TODO Auto-generated method stub
 		return this.getUsers().stream()
 				.anyMatch(user -> user == aUser); // TODO: implementar equals para User
 	}
 	private boolean isIn(Sample aSample) {
-		// TODO Auto-generated method stub
 		return this.getSamples().stream()
 				.anyMatch(sample -> sample == aSample); // TODO: implementar equals para Samples
 	}
 	private boolean isIn(Location aLocation) {
-		// TODO Auto-generated method stub
 		return this.getLocations().stream()
 				.anyMatch(location -> location == aLocation); // TODO: implementar equals para Location
 	}
 	private boolean isIn(ZoneCoverage aZone) {
-		// TODO Auto-generated method stub
+		return this.getZones().stream()
+				.anyMatch(zone -> zone == aZone); // TODO: implementar equals para ZoneCoverage
+	}
+
+	private boolean isInListeners(ZoneCoverage aZone) {
 		return this.listenerZones.stream()
 				.anyMatch(zone -> zone == aZone); // TODO: implementar equals para ZoneCoverage
 	}
 
 	// Nota: No se usa interfaz ya que el sistema es único.
 	public void Attach(ZoneCoverage aZone) {
-		if (! this.isIn(aZone)) {
+		if (! this.isInListeners(aZone)) {
 			this.listenerZones.add(aZone);
 		}
 	};
