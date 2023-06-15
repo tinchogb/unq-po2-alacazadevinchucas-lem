@@ -8,7 +8,13 @@ import java.util.HashSet;
 public class SearchSample {
 
 	private System 			system = System.getInstance();
-	
+
+	public SearchSample() {}
+
+	public SearchSample(System aSys) {
+		this.system = aSys;
+	}
+
 	public List<Sample> creationDate(LocalDate date) {
 		return this.system.getSamples().stream()
 			.filter(s -> s.getCreationDate() == date)
