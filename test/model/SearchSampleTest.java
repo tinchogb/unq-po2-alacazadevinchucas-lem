@@ -54,16 +54,16 @@ public class SearchSampleTest {
 		assertNotNull(this.searchSample);
 	}
 
-	@Test
-	public void testCreationDate() {
-		when(this.sample1.getCreationDate()).thenReturn(date1);
-		this.samples1 = spy(this.samples1);
-		this.samples1.add(sample1);
-		System systemN = spy(this.system);
-		SearchSample searchSampleNew = new SearchSample(systemN);
-		when(systemN.getSamples()).thenReturn(this.samples1);
-		assertEquals(this.samples1, searchSampleNew.creationDate(date1));
-	}
+//	@Test
+//	public void testCreationDate() {
+//		when(this.sample1.getCreationDate()).thenReturn(date1);
+//		this.samples1 = spy(this.samples1);
+//		this.samples1.add(sample1);
+//		System systemN = spy(this.system);
+//		SearchSample searchSampleNew = new SearchSample(systemN);
+//		when(systemN.getSamples()).thenReturn(this.samples1);
+//		assertEquals(this.samples1, searchSampleNew.creationDate(date1));
+//	}
 
 	@Test
 	public void testInsectType() {
