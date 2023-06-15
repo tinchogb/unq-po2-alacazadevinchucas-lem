@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class OrganizationTest {
 
 	private Organization			org;
+	private Organization			orgMock;
 
 	private OrganizationType 		type;
 	private List<ZoneCoverage> 		registeredZones = new ArrayList<>();
@@ -38,7 +39,7 @@ public class OrganizationTest {
 		this.location			= mock(Location.class);
 		this.pluginSample		= mock(ExternalFunctionality.class);
 		this.pluginValidation	= mock(ExternalFunctionality.class);
-
+		
 		this.zone1				= mock(ZoneCoverage.class);
 		this.sample				= mock(Sample.class);
 
@@ -66,13 +67,18 @@ public class OrganizationTest {
 		assertEquals(this.location, this.org.getLocation());
 	}
 
-//	@Test
-//	public void testUpdate() {
-//		when(sample.isValidated()).thenReturn(true);
-//		assertEquals(this.org, this.org.Update(this.zone1, this.sample));
-//		when(sample.isValidated()).thenReturn(false);
-//		
-//	}
+	@Test
+	public void testUpdate() {
+		when(sample.isValidated()).thenReturn(true);
+		this.org.Update(zone1, sample);
+		verify(sample,times(1)).isValidated();
+		Sample sample2	= mock(Sample.class);
+		ZoneCoverage zone2	= mock(ZoneCoverage.class);
+		this.orgMock = new Organization(type, registeredZones, location, pluginSample, pluginValidation, empleados);
+		this.orgMock = spy(this.orgMock);
+		this.orgMock.Update(zone2, sample2);	
+		verify(orgMock,times(1)).Update(zone2, sample2);
+	}
 
 	@Test
 	public void testNbCurrentWorkers() {

@@ -59,7 +59,7 @@ public class SystemTest {
 
 		
 		// SUT (System Under Test): objeto a testear
-		this.system     = new System();
+		this.system     = System.getInstance();
 	}
 
 	@Test

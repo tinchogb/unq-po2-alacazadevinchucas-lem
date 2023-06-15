@@ -34,7 +34,7 @@ public class Organization implements IOrganization {
 		if (aSample.isValidated()) { this.newValidationExtFunc(aZone, aSample); }
 		else					   { this.newSampleExtFunc(aZone, aSample); }
 	}
-
+	
 	public int nbCurrentWorkers() {
 		return this.empleados.size();
 	}
