@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ZoneCoverage implements IZoneCoverage{
 
-	private System 		system = System.getInstance("systemLEM");
+	private System 		system = System.getInstance();
 	private String 	 	name;
 	private Location 	epicenter;
 	private Integer  	radiusInKm;
@@ -14,11 +14,18 @@ public class ZoneCoverage implements IZoneCoverage{
 
 	// Constructor for testing purpose only 
 	public ZoneCoverage(String name, Location epicenter, Integer radiusInKm, List<IOrganization> orgs) {
+		this.name			= name;
+		this.epicenter		= epicenter;
+		this.radiusInKm		= radiusInKm;
+		this.organizations	= orgs;
+	}	
+
+	public ZoneCoverage(String name, Location epicenter, Integer radiusInKm, System system) {
 		this.name		= name;
 		this.epicenter	= epicenter;
 		this.radiusInKm	= radiusInKm;
-		this.organizations	= orgs;
-	}	
+		this.system		= system;
+	}
 
 	// Real constructor
 	public ZoneCoverage(String name, Location epicenter, Integer radiusInKm) {
@@ -27,6 +34,7 @@ public class ZoneCoverage implements IZoneCoverage{
 		this.epicenter	= epicenter;
 		this.radiusInKm	= radiusInKm;
 	}
+
 
 	@Override
 	public void Attach(IOrganization anOrg) {
@@ -41,8 +49,10 @@ public class ZoneCoverage implements IZoneCoverage{
 
 	@Override
 	public void Detach(IOrganization anOrg) {
-		List<IOrganization> newOrgs = this.organizations.stream().filter(org -> org != anOrg).toList();
-		this.organizations = newOrgs;
+//		this.organizations = this.organizations.stream().filter(org -> org != anOrg).toList();
+		this.organizations.removeIf(o -> o == anOrg);
+//		List<IOrganization> newOrgs = this.organizations.stream().filter(org -> org != anOrg).toList();
+//		this.organizations = newOrgs;
 	}
 
 	@Override
@@ -65,21 +75,20 @@ public class ZoneCoverage implements IZoneCoverage{
 	public Integer 	getRadiusInKm() 	{ return radiusInKm; }
 
 	public List<Sample> samplesInZone() {
-		// TODO Auto-generated method stub
 		return this.system.getSamples().stream()
 					.filter(sample -> this.inZone(sample.getLocation()))
 					.toList();
 	}
 
 	private boolean inZone(Location location) {
-		// TODO Auto-generated method stub
-		return this.epicenter.distance(location) <= this.radiusInKm;
+		return (this.epicenter.distance(location) <= this.radiusInKm);
 	}
 
 
 	public List<ZoneCoverage> intersectionZones() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.system.getZones().stream()
+				.filter(zone -> this.inZone(zone.getEpicenter()))
+				.toList();
 	}
 
 }
