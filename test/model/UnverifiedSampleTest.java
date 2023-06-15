@@ -39,7 +39,7 @@ class UnverifiedSampleTest {
 		type2      = mock(OpinionType.class);
 		type3      = mock(OpinionType.class);
 		opinions.add(type1);
-		opinionsSample.add(opinion);
+		opinionsSample.add(opinion); 
 	}
 	
 	@Test
