@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 public class SystemTest {
 
 	public static System system;
@@ -20,15 +21,15 @@ public class SystemTest {
 	private  List<User>			users     = new ArrayList<User>(); 
 	private  List<Sample>		samples   = new ArrayList<Sample>(); 
 	private  List<Location>		locations = new ArrayList<Location>();
+	private  List<ZoneCoverage>	zones 	  = new ArrayList<ZoneCoverage>();
 
 
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
 		this.instance		 = mock(System.class);
-		when(this.instance.getInstance("systemLEM")).thenCallRealMethod();
+		when(this.instance.getInstance()).thenCallRealMethod();
 
-		this.name        = "systemLEM";
 
 //		this.organization = mock(Organization.class);
 		this.listenerZones = mock(List<ZoneCoverage.class>);
@@ -43,14 +44,14 @@ public class SystemTest {
 
 		
 		// SUT (System Under Test): objeto a testear
-		this.system     = new System("systemLEM");
+		this.system     = new System();
 		this.system.add(sample1);
 		this.system.add(sample2);
 	}
 
 	@Test
 	void testConstructor() {
-		assertFalse(this.system==null);
+		assertNotNull(this.system);
 	}
 	
 	@Test
