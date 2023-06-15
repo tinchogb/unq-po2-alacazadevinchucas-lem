@@ -23,7 +23,7 @@ public class System {
 		this.users = users;
 	}
 
-	protected System(List<ZoneCoverage> listeners) {
+	protected System(List<ZoneCoverage> listeners,int num) {
 		this.listenerZones = listeners;
 	}
 

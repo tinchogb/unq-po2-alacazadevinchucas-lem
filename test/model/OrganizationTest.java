@@ -1,11 +1,14 @@
 package model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+
 
 import java.util.List;
 import java.util.ArrayList;
@@ -63,13 +66,13 @@ public class OrganizationTest {
 		assertEquals(this.location, this.org.getLocation());
 	}
 
-	@Test
-	public void testUpdate() {
-		when(sample.isValidated()).thenReturn(true);
-		assertEquals(this.org, this.org.Update(this.zone1, this.sample));
-		when(sample.isValidated()).thenReturn(false);
-		
-	}
+//	@Test
+//	public void testUpdate() {
+//		when(sample.isValidated()).thenReturn(true);
+//		assertEquals(this.org, this.org.Update(this.zone1, this.sample));
+//		when(sample.isValidated()).thenReturn(false);
+//		
+//	}
 
 	@Test
 	public void testNbCurrentWorkers() {

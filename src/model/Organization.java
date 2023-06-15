@@ -35,7 +35,7 @@ public class Organization implements IOrganization {
 		else					   { this.newSampleExtFunc(aZone, aSample); }
 	}
 
-	public Integer nbCurrentWorkers() {
+	public int nbCurrentWorkers() {
 		return this.empleados.size();
 	}
 

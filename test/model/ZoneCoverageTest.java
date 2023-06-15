@@ -76,7 +76,7 @@ public class ZoneCoverageTest {
 		// Exercise
 		List<Sample> expSamples = new ArrayList<>();
 		when(this.system.getSamples()).thenReturn(expSamples);
-		this.sample1.location = this.epicenter;
+		when (sample1.getLocation()).thenReturn(this.epicenter);
 		this.system.add(sample1);
 		List<Sample> currSamplesInZone = zone.samplesInZone();
 
@@ -89,9 +89,9 @@ public class ZoneCoverageTest {
 		// Exercise
 		List<Sample> expSamples = new ArrayList<>();
 		when(this.system.getSamples()).thenReturn(expSamples);
-		this.sample1.location = this.epicenter;
+		when (sample1.getLocation()).thenReturn(this.epicenter);
 		this.system.add(sample1);
-		this.sample2.location = this.epicenter;
+		when (sample2.getLocation()).thenReturn(this.epicenter);
 		this.system.add(sample2);
 		List<Sample> currSamplesInZone = zone.samplesInZone();
 

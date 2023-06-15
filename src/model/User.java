@@ -44,17 +44,17 @@ public class User {
 	}
 
 	private boolean enoughSamplesLastMonth() {
-		List<Sample> lista = System.getInstance().getSamples();
+		List<Sample> lista = system.getSamples(); 
 		List<VinchucaSpecies> opinions = new ArrayList<VinchucaSpecies> ();
 		
-		lista.stream().filter(o -> o.getCreationDate().isAfter(LocalDate.now().minusDays(30)))
+		lista.stream().filter(o -> o.getUser()==this && o.getCreationDate().isAfter(LocalDate.now().minusDays(30)))
 			.forEach(s -> opinions.add(s.getSpecie()));
 		return opinions.size()>=10;
 
 	}
 
 	private boolean enoughOpinionsLastMonth() {
-		List<Sample> lista = System.getInstance().getSamples();
+		List<Sample> lista = system.getSamples();
 		List<Opinion> opinions = new ArrayList<Opinion> ();
 		
 		lista.stream().forEach(s -> opinions.addAll(s.getOpinions())); //llena opinions con todas las opiniones hechas en el sistema
@@ -62,7 +62,7 @@ public class User {
 					o.getDate().isAfter(LocalDate.now().minusDays(30))).toList();//quedan solo las opiniones del usuario de los ultimos 30 días
 		
 		return opinionsUser.size()>= 20;
-		
+		 
 	}
 
 	public UserState getState() {

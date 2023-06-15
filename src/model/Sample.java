@@ -172,8 +172,8 @@ public class Sample {
 		return opinionsType;
 	}
 	
-	public void isValidated() {
-		this.state.isValidated();
+	public boolean isValidated() {
+		return this.state.isValidated();
 	}
 
 }
