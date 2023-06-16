@@ -37,14 +37,6 @@ public class SystemTest {
 	@BeforeEach
 	public void setUp() {
 		// DOC (Depended-On-Component): nuestros doubles
-//		this.instance = mock(System.class);
-//		when(this.instance.getInstance()).thenReturn(this.instance);
-//		try (MockedStatic<System> instance = mockStatic(System.class)) {
-//			instance.when(System::getInstance).thenReturn(this);
-//			assertEquals(instance, System.getInstance());
-//			instance.verify(System::getInstance);
-//		}
-
 
 //		this.organization = mock(Organization.class);
 		this.listenerZones = (List<ZoneCoverage>) mock(List.class);
@@ -67,14 +59,10 @@ public class SystemTest {
 		assertNotNull(this.system);
 	}
 	
-//	@Test
-//	void testGetInstance() {
-//		try (MockedStatic<System> mocked = mockStatic(System.class)) {
-//			mocked.when(System::getInstance).thenReturn(this);
-//			assertEquals(mocked, System.getInstance());
-//			mocked.verify(System::getInstance);
-//		}
-//	}
+	@Test
+	void testGetInstance() {
+		assertEquals(system,System.getInstance());
+	}
 
 	@Test
 	void testGetUsers() {
@@ -128,17 +116,29 @@ public class SystemTest {
 
 	@Test
 	void testAddForSamples() {
-		// Igual que 'testAddForUsers'
+		this.samples  = spy(new ArrayList<Sample>());
+		this.system = new System(this.samples,0,0);
+		this.system.add(sample1);
+		assertEquals(this.samples, this.system.getSamples());
+		verify(this.samples, times(1)).add(sample1);
 	}
 
 	@Test
 	void testAddForLocations() {
-		// Igual que 'testAddForUsers'
+		this.locations  = spy(new ArrayList<Location>());
+		this.system = new System(this.locations,0,0,0);
+		this.system.add(location1);
+		assertEquals(this.locations, this.system.getLocations());
+		verify(this.locations, times(1)).add(location1);
 	}
 
 	@Test
 	void testAddForZones() {
-		// Igual que 'testAddForUsers'
+		this.zones  = spy(new ArrayList<ZoneCoverage>());
+		this.system = new System(this.zones,0,0,0,0);
+		this.system.add(zone1);
+		assertEquals(this.zones, this.system.getZones());
+		verify(this.zones, times(1)).add(zone1);
 	}
 
 	@Test
