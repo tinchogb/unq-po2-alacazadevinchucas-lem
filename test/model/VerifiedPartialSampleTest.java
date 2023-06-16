@@ -71,7 +71,7 @@ class VerifiedPartialSampleTest {
 		when(sample.calculateResult(sample.expertsOpinions())).thenReturn(type);
 		when(opinion.getType()).thenReturn(type);
 		partial.verifyStatusChange(opinion,sample);
-		verify(sample,times(1)).changeSampleState(partial.getSiguiente());
+		verify(sample,times(1)).changeSampleState(new VerifiedSample());
 	}
 	
 	@Test
@@ -85,7 +85,7 @@ class VerifiedPartialSampleTest {
 		when(opinion.getType()).thenReturn(type);
 		when(opinion1.getType()).thenReturn(type1);
 		partial.verifyStatusChange(opinion,sample);
-		verify(sample,times(1)).changeSampleState(partial.nextState);
+		verify(sample,times(1)).changeSampleState(new VerifiedSample());
 	}
 	
 	@Test

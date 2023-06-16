@@ -15,7 +15,6 @@ public class Sample {
 	private User user;
 	private ArrayList<Opinion> opinions;
 	private SampleState state;
-	private Undefined undefined= new Undefined();
 	private System system;
 	private LocalDate creationDate;
 	private Opinion lastOpinion;
@@ -90,7 +89,7 @@ public class Sample {
 		state.saveOpinion(opinion,this);
 	}
 	
-	void userVerificator(Opinion opinion) throws RuntimeException {
+	 void userVerificator(Opinion opinion) throws RuntimeException {
 		if (opinion.isRepeatUser(this.getOpinions())){
 			throw new RuntimeException("El usuario ya opinó en esta muestra");
 		}	
@@ -114,7 +113,7 @@ public class Sample {
 				return (this.elMasRepetidoSiHay(opinions).get(0));
 			}
 			else {
-				return (this.throwUndefined()); 
+				return new Undefined(); 
 			}
 			
 	}
@@ -149,11 +148,6 @@ public class Sample {
 	      return max;
 	}
 	
-	
-	public Undefined throwUndefined() {
-		return undefined; 
-		
-	}
 	
 	public List<OpinionType> basicOpinions() {
 		List<OpinionType> opinionsType = opinions
