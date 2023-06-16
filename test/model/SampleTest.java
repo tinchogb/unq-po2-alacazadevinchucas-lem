@@ -33,7 +33,6 @@ class SampleTest{
 	public List<OpinionType> opinionsType = new ArrayList<>();
 	public OpinionType type;
 	public OpinionType type1;
-	public Undefined undefined;
 	public User user;
 	public System system;
 	
@@ -49,7 +48,6 @@ class SampleTest{
 		statePartial    = mock(VerifiedPartialSample.class);
 		type            = mock(OpinionType.class);
 		type1           = mock(OpinionType.class);
-		undefined       = mock(Undefined.class);
 		user            = mock(User.class);
 		system          = mock(System.class);
 		opinionsType.add(type);
@@ -180,7 +178,7 @@ class SampleTest{
 		opinionsType.add(type1);
 		assertNotEquals(type,sample.calculateResult(opinionsType));
 		assertNotEquals(type1,sample.calculateResult(opinionsType));
-		assertEquals(sample.throwUndefined(),sample.calculateResult(opinionsType));
+		assertEquals(new Undefined(),sample.calculateResult(opinionsType));
 	}
 	
 	@Test

@@ -15,5 +15,10 @@ public class VerifiedSample implements SampleState {
 	public boolean isValidated() {
 		return true;
 	}
+	
+	 @Override // Para poder testear
+	    public boolean equals(Object o) {
+	        return this.getClass().getName() == o.getClass().getName();
+	 }
 }
 

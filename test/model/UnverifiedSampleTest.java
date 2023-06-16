@@ -56,13 +56,9 @@ class UnverifiedSampleTest {
 		
 		unverified.saveOpinion(opinion, sample);
 		verify(sample, times(1)).addOpinion(opinion);
-		verify(sample, times(1)).changeSampleState(unverified.getNextState());
+		verify(sample, times(1)).changeSampleState(new VerifiedPartialSample());
 	}
 	
-	@Test
-	void testGetSiguiente() {
-		assertEquals(unverified.nextState,unverified.getNextState());
-	}
 	
 	@Test
 	void testGetCurrentResult() {

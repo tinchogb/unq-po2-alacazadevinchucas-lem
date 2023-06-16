@@ -4,13 +4,6 @@ import java.util.stream.Stream;
 
 public class VerifiedPartialSample implements SampleState{
 	
-	public VerifiedSample nextState = new VerifiedSample();
-	
-	 
-	
-	public VerifiedSample getSiguiente() {
-		return nextState;
-	}
 
 	@Override
 	public void saveOpinion(Opinion opinion, Sample sample)throws RuntimeException {
@@ -27,13 +20,13 @@ public class VerifiedPartialSample implements SampleState{
 
 		Stream <Opinion> sOpinions = sample.getOpinions().stream();
 		if (sample.calculateResult(sample.expertsOpinions()) == opinion.getType()) {
-			sample.changeSampleState(nextState);
+			sample.changeSampleState(new VerifiedSample());
 		}
 		
 		else if (sOpinions.filter(o -> o.getIsExpertOpinion())
 				 .map(o -> o.getType())
 				 .anyMatch(o -> o == opinion.getType())){
-			sample.changeSampleState(nextState);
+			sample.changeSampleState(new VerifiedSample());
 		}
 	}
 
@@ -47,4 +40,9 @@ public class VerifiedPartialSample implements SampleState{
 	public boolean isValidated() {
 		return false;
 	}
+	
+	 @Override // Para poder testear
+	    public boolean equals(Object o) {
+	        return this.getClass().getName() == o.getClass().getName();
+	 }
 }

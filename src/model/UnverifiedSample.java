@@ -3,11 +3,11 @@ package model;
 
 public class UnverifiedSample implements SampleState{
 	
-	public VerifiedPartialSample nextState = new VerifiedPartialSample();
+	//public VerifiedPartialSample nextState = new VerifiedPartialSample();
 	
-	public VerifiedPartialSample getNextState() {
-		return nextState; 
-	}
+//	public VerifiedPartialSample getNextState() {
+//		return nextState; 
+//	}
 	
 	public void saveOpinion(Opinion opinion,Sample sample) {
 		sample.addOpinion(opinion);
@@ -15,7 +15,7 @@ public class UnverifiedSample implements SampleState{
 	}
 	private void verifyStatusChange(Opinion opinion, Sample sample) {
 		if (opinion.getIsExpertOpinion()) {
-			sample.changeSampleState(nextState);
+			sample.changeSampleState(new VerifiedPartialSample());
 		}
 	}
 	
@@ -30,5 +30,9 @@ public class UnverifiedSample implements SampleState{
 		return false;
 	}
 			
+	 @Override // Para poder testear
+	    public boolean equals(Object o) {
+	        return this.getClass().getName() == o.getClass().getName();
+	 }
 	
 }
