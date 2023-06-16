@@ -15,24 +15,6 @@ public class User {
 	public User(UserState state) {
 		this.state = state;
 	}
-
-	public void introduceSample(VinchucaSpecies specie, String picture, Location location, Opinion opinion) {
-		Sample sample = this.createSample(specie, picture,location,opinion);
-		this.sendSample(sample);
-	}
-	
-	public  Sample createSample(VinchucaSpecies specie, String picture, Location location,
-			Opinion opinion) {
-		return this.state.createSample(specie, picture, location, this, opinion);
-	}
-	
-	public  void sendSample(Sample sample) {
-		System.getInstance().add(sample);
-	}
-	
-	public void review(Sample sample, OpinionType type, UserState state) {
-		this.state.review(sample,type,state,this);
-	}
 	
 	public void verifyState() {
 		if (this.enoughOpinionsLastMonth() && this.enoughSamplesLastMonth()) {

@@ -26,6 +26,16 @@ public class System {
 	protected System(List<ZoneCoverage> listeners,int num) {
 		this.listenerZones = listeners;
 	}
+	
+	protected System(List<Sample> listeners,int num,int n) {
+		this.samples = listeners;
+	}
+	protected System(List<Location> locations,int num,int n,int m) {
+		this.locations = locations;
+	}
+	protected System(List<ZoneCoverage> zones,int num,int n, int m, int o) {
+		this.zones = zones;
+	}
 
 	public static System getInstance() {
         if (instance == null) {

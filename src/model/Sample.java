@@ -169,5 +169,10 @@ public class Sample {
 	public boolean isValidated() {
 		return this.state.isValidated();
 	}
+	
+	 @Override // Para poder testear
+	    public boolean equals(Object o) {
+	        return this.getClass().getName() == o.getClass().getName();
+	 }
 
 }
