@@ -7,7 +7,7 @@ public class Organization implements IOrganization {
 
 	
 	private List<ZoneCoverage> 		registeredZones;
-	public List<Empleado>			empleados = new ArrayList<Empleado>();				
+	public List<IEmpleado>			empleados = new ArrayList<IEmpleado>();				
 
 	public  OrganizationType		type;
 	public  Location 				location;
@@ -15,7 +15,7 @@ public class Organization implements IOrganization {
 	private ExternalFunctionality 	pluginValidation;
 
 	public Organization(OrganizationType type, List<ZoneCoverage> registeredZones, Location location,
-		ExternalFunctionality pluginSample, ExternalFunctionality pluginValidation, List<Empleado> empleados) {
+		ExternalFunctionality pluginSample, ExternalFunctionality pluginValidation, List<IEmpleado> empleados) {
 		this.type				= type;
 		this.registeredZones 	= registeredZones;
 		this.location 			= location;
@@ -40,11 +40,11 @@ public class Organization implements IOrganization {
 	}
 
 	private void newSampleExtFunc(ZoneCoverage zone, Sample sample) {
-		pluginSample.newEvent(this, zone, sample);
+		this.pluginSample.newEvent(this, zone, sample);
 	}
 
 	private void newValidationExtFunc(ZoneCoverage zone, Sample sample) {
-		pluginValidation.newEvent(this, zone, sample);
+		this.pluginValidation.newEvent(this, zone, sample);
 	}
 
 
