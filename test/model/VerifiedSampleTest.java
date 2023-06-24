@@ -49,4 +49,10 @@ class VerifiedSampleTest {
 		assertTrue(verified.isValidated());
 		
 	}
+	
+	@Test
+	void equals() {
+		assertEquals(new VerifiedSample(),new VerifiedSample());
+		assertNotEquals(new VerifiedSample(),sample);
+	}
 }

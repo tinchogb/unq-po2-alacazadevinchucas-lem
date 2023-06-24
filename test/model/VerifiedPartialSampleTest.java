@@ -99,5 +99,11 @@ class VerifiedPartialSampleTest {
 		assertFalse(partial.isValidated());
 		
 	}
+	
+	@Test
+	void equals() {
+		assertEquals(new VerifiedPartialSample(),new VerifiedPartialSample());
+		assertNotEquals(new VerifiedPartialSample(),sample);
+	}
 
 }
