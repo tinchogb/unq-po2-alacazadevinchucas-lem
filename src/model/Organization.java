@@ -9,12 +9,12 @@ public class Organization implements IOrganization {
 	private List<ZoneCoverage> 		registeredZones;
 	public List<Empleado>			empleados = new ArrayList<Empleado>();				
 
-	public  OrganizationType		type;
+	public  OrganizationTypeTest		type;
 	public  Location 				location;
 	private ExternalFunctionality 	pluginSample;
 	private ExternalFunctionality 	pluginValidation;
 
-	public Organization(OrganizationType type, List<ZoneCoverage> registeredZones, Location location,
+	public Organization(OrganizationTypeTest type, List<ZoneCoverage> registeredZones, Location location,
 		ExternalFunctionality pluginSample, ExternalFunctionality pluginValidation, List<Empleado> empleados) {
 		this.type				= type;
 		this.registeredZones 	= registeredZones;
@@ -25,7 +25,7 @@ public class Organization implements IOrganization {
 	}
 
 
-	public OrganizationType   getType() 		   { return type; }
+	public OrganizationTypeTest   getType() 		   { return type; }
 	public List<ZoneCoverage> getRegisteredZones() { return registeredZones; }
 	public Location 		  getLocation() 	   { return location; }
 

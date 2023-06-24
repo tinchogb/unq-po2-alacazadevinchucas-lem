@@ -19,7 +19,7 @@ public class OrganizationTest {
 	private Organization			org;
 	private Organization			orgMock;
 
-	private OrganizationType 		type;
+	private OrganizationTypeTest 		type;
 	private List<ZoneCoverage> 		registeredZones = new ArrayList<>();
 	private List<Empleado>			empleados = new ArrayList<>();
 	private Location 				location;
