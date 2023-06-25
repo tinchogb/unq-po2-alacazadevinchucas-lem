@@ -1,5 +1,3 @@
 package model;
 
-public interface OpinionType extends Answer{
-
-}
+public interface OpinionType extends Answer {}
