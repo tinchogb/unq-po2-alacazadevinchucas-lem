@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Organization implements IOrganization {
-
 	
 	private List<ZoneCoverage> 		registeredZones;
 	public List<IEmpleado>			empleados = new ArrayList<IEmpleado>();				
 
 	public  OrganizationType		type;
-	public  Location 				location;
+	public  Location 				    location;
 	private ExternalFunctionality 	pluginSample;
 	private ExternalFunctionality 	pluginValidation;
 
@@ -23,7 +22,6 @@ public class Organization implements IOrganization {
 		this.pluginValidation 	= pluginValidation;
 		this.empleados 			= empleados;
 	}
-
 
 	public OrganizationType   getType() 		   { return type; }
 	public List<ZoneCoverage> getRegisteredZones() { return registeredZones; }
@@ -46,6 +44,4 @@ public class Organization implements IOrganization {
 	private void newValidationExtFunc(ZoneCoverage zone, Sample sample) {
 		this.pluginValidation.newEvent(this, zone, sample);
 	}
-
-
 }

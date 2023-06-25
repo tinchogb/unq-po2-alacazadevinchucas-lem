@@ -3,9 +3,10 @@ package model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
+
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -238,5 +239,10 @@ class SampleTest{
 		verify(system, times(0)).Notify(sample);
 	}
 	
+	@Test
+	void equals() {
+		assertEquals(new Sample(specie,picture,location,user,opinion,stateUnverified,system),new Sample(null,null,null,null,null,null,null));
+		assertNotEquals(sample,opinion);
+	}
 	
 }

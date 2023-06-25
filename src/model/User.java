@@ -15,6 +15,11 @@ public class User {
 	public User(UserState state) {
 		this.state = state;
 	}
+	//constructor para testeo
+	public User(UserState state, System system) {
+		this.state = state;
+		this.system = system;
+	}
 	
 	public void verifyState() {
 		if (this.enoughOpinionsLastMonth() && this.enoughSamplesLastMonth()) {
