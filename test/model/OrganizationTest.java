@@ -21,7 +21,7 @@ public class OrganizationTest {
 
 	private OrganizationType 		type;
 	private List<ZoneCoverage> 		registeredZones = new ArrayList<>();
-	private List<Empleado>			empleados = new ArrayList<>();
+	private List<IEmpleado>			empleados = new ArrayList<>();
 	private Location 				location;
 	private ExternalFunctionality 	pluginSample;
 	private ExternalFunctionality 	pluginValidation;
@@ -35,7 +35,7 @@ public class OrganizationTest {
 	// DOC (Depended-On-Component): nuestros doubles
 //		this.type				= mock(OrganizationType.class);
 		this.registeredZones	= (List<ZoneCoverage>) mock(List.class);
-		this.empleados			= (List<Empleado>) mock(List.class);
+		this.empleados			= (List<IEmpleado>) mock(List.class);
 		this.location			= mock(Location.class);
 		this.pluginSample		= mock(ExternalFunctionality.class);
 		this.pluginValidation	= mock(ExternalFunctionality.class);
@@ -82,7 +82,7 @@ public class OrganizationTest {
 
 	@Test
 	public void testNbCurrentWorkers() {
-		this.empleados = spy(new ArrayList<Empleado>());
+		this.empleados = spy(new ArrayList<IEmpleado>());
 		when(this.empleados.size()).thenReturn(0);
 		this.org = new Organization(type, registeredZones, location, pluginSample, pluginValidation, empleados);
 		assertEquals(0, this.org.nbCurrentWorkers());
