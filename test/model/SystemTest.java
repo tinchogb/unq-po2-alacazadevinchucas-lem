@@ -61,7 +61,7 @@ public class SystemTest {
 	
 	@Test
 	void testGetInstance() {
-		assertEquals(system,System.getInstance());
+		assertEquals(system, System.getInstance());
 	}
 
 	@Test
