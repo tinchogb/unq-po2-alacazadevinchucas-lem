@@ -30,9 +30,11 @@ class OpinionTest {
 		type    = mock(OpinionType.class); 
 		user    = mock(User.class);
 		user1   = mock(User.class);
-		opinion = new Opinion(user,type,true);
-		opinion1= new Opinion(user1,type,false);
-		opinion2= new Opinion(user,type,false);
+		when(user.isExpert()).thenReturn(true);
+		when(user1.isExpert()).thenReturn(false);
+		opinion = new Opinion(user,type);
+		opinion1= new Opinion(user1,type);
+		opinion2= new Opinion(user,type); 
 		
 	} 
 

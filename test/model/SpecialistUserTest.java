@@ -38,5 +38,10 @@ class SpecialistUserTest {
 	void testGetState() {
 		assertEquals(new ExpertUser(),specialist.getState());
 	}
+	
+	@Test
+	void testIsExpert() {
+		assertTrue(specialist.isExpert());
+	}
 
 }

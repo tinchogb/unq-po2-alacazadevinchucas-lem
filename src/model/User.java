@@ -57,6 +57,10 @@ public class User {
 		return this.state;
 	}
 
+	public boolean isExpert() {
+		return state.isExpert();
+	}
+
 
 
 }

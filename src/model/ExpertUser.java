@@ -7,5 +7,10 @@ public class ExpertUser implements UserState {
 	        return this.getClass().getName() == o.getClass().getName();
 	 }
 
+	@Override
+	public boolean isExpert() {
+		return true;
+	}
+
 
 }

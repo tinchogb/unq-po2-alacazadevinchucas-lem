@@ -13,11 +13,11 @@ public class Opinion {
 	private boolean isExpertOpinion;
 
 	
-	public Opinion(User user, OpinionType type, boolean isExpertOpinion) {
+	public Opinion(User user, OpinionType type) {
 		this.user            = user;
 		this.type            = type;
 		this.date            = LocalDate.now();
-		this.isExpertOpinion = isExpertOpinion;
+		this.isExpertOpinion = user.isExpert();
 	}
 
 	public Object getUser() { 

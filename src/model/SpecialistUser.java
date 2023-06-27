@@ -7,6 +7,11 @@ public class SpecialistUser extends User{
 	}
 	
 	@Override
+	public boolean isExpert() {
+		return true;
+	}
+	
+	@Override
 	public void verifyState() {
 		
 	}

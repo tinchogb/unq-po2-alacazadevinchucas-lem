@@ -6,5 +6,10 @@ public class BasicUser implements UserState {
 	    public boolean equals(Object o) {
 	        return this.getClass().getName() == o.getClass().getName();
 	 }
+
+	@Override
+	public boolean isExpert() {
+		return false;
+	}
 	
 }
