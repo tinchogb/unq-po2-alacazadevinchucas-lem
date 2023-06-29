@@ -18,5 +18,10 @@ class ExpertUserTest {
 	void testIsExpert() {
 		assertTrue(expert.isExpert());
 	}
+	
+	@Test
+	void testEquals() {
+		assertEquals(new ExpertUser(), new ExpertUser());
+	}
 
 }

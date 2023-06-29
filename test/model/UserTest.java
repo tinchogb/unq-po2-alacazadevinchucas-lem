@@ -67,7 +67,7 @@ class UserTest {
 		when(opinion.getUser()).thenReturn(user);
 		when(opinion.getDate()).thenReturn(LocalDate.now());
 		user.verifyState();
-		assertEquals(new ExpertUser(), user.getState());
+		assertEquals("model.ExpertUser", user.getState().getClass().getName());
 		
 	}
 	
@@ -86,7 +86,7 @@ class UserTest {
 		when(opinion.getUser()).thenReturn(user);
 		when(opinion.getDate()).thenReturn(LocalDate.now());
 		user.verifyState();
-		assertEquals(new BasicUser(), user.getState());
+		assertEquals("model.BasicUser", user.getState().getClass().getName());
 		
 	}
 	
@@ -105,7 +105,7 @@ class UserTest {
 		when(opinion.getUser()).thenReturn(user);
 		when(opinion.getDate()).thenReturn(LocalDate.now().minusDays(60));
 		user.verifyState();
-		assertEquals(new BasicUser(), user.getState());
+		assertEquals("model.BasicUser", user.getState().getClass().getName());
 		
 	}
 	

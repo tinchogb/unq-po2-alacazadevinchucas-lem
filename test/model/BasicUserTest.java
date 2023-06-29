@@ -19,5 +19,10 @@ class BasicUserTest {
 	void testIsExpert() {
 		assertFalse(basic.isExpert());
 	}
+	
+	@Test
+	void testEquals() {
+		assertEquals(new BasicUser(), new BasicUser());
+	}
 
 }

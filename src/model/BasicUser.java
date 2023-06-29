@@ -1,5 +1,9 @@
 package model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 public class BasicUser implements UserState {
 
 	 @Override // Para poder testear
@@ -11,5 +15,7 @@ public class BasicUser implements UserState {
 	public boolean isExpert() {
 		return false;
 	}
+	
+
 	
 }

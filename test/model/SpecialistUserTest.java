@@ -36,7 +36,7 @@ class SpecialistUserTest {
 
 	@Test
 	void testGetState() {
-		assertEquals(new ExpertUser(),specialist.getState());
+		assertEquals("model.ExpertUser",specialist.getState().getClass().getName());
 	}
 	
 	@Test

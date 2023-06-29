@@ -179,7 +179,7 @@ class SampleTest{
 		opinionsType.add(type1);
 		assertNotEquals(type,sample.calculateResult(opinionsType));
 		assertNotEquals(type1,sample.calculateResult(opinionsType));
-		assertEquals(new Undefined(),sample.calculateResult(opinionsType));
+		assertEquals("model.Undefined",sample.calculateResult(opinionsType).getClass().getName());
 	}
 	
 	@Test
